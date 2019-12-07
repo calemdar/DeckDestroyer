@@ -1,0 +1,30 @@
+<HEADER>
+frames 1
+width 25
+height 16
+color red
+slowdown 5
+</HEADER>
+<BODY>
+_________________________
+| ___                    |
+|/___\                   |
+||_2_|   Strike          |
+|\___/                   |
+|                        |
+|                        |
+|                        |
+|                        |
+|                        |
+|________________________|
+|                        |
+|    Does 5 damage       |
+|                        |
+|       ________         |
+|______| ATTACK |________|
+end
+
+</BODY>
+<FOOTER>
+version 1
+</FOOTER>
