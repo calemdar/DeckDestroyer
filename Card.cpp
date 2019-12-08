@@ -16,6 +16,7 @@ Card::Card() {
 	location = Location::DECK;
 
 	setSprite("card");
+	setSolidness(df::SOFT);
 
 	registerInterest(df::KEYBOARD_EVENT);
 	registerInterest(df::STEP_EVENT);
@@ -23,8 +24,9 @@ Card::Card() {
 
 
 	setType("Card");
-
-	df::Vector p(20, WM.getBoundary().getVertical() / 2);
+}
+void Card::setCardPosition(int x,int y) {
+	df::Vector p(x, y);
 	setPosition(p);
 }
 Card::Card(std::string new_name, int new_cost, std::string new_type, std::string new_text) {

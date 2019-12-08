@@ -1,7 +1,7 @@
 #include "GameStart.h"
 #include "GameManager.h"
 #include "Points.h"
-#include "Card.h"
+#include "Player.h"
 #include "ResourceManager.h"
 #include <EventKeyboard.h>
 
@@ -39,7 +39,7 @@ int GameStart::eventHandler(const df::Event* p_e) {
 
 void GameStart::start() {
 	// Create card.
-	new Card;
+	Player* p = new Player;
 
 	// Setup heads-up display.
 	df::ViewObject* p_vo = new df::ViewObject; // Health.

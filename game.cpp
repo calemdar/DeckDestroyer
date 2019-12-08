@@ -12,11 +12,11 @@
 // Load game resources.
 void loadResources(void) {
 	// Load sprites
-	RM.loadSprite("sprites/saucer-spr.txt", "saucer");
-	RM.loadSprite("sprites/ship-spr.txt", "ship");
+	//RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+	//RM.loadSprite("sprites/ship-spr.txt", "ship");
 	RM.loadSprite("sprites/card-spr.txt", "card");
-	RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
-	RM.loadSprite("sprites/explosion-spr.txt", "explosion");
+	//RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
+	//RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
 	//RM.loadSprite("sprites/game-win-spr.txt", "game-win");
