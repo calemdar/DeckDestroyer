@@ -2,6 +2,10 @@
 #include "Sprite.h"
 #include "EventView.h"
 #include "WorldManager.h"
+#include "EventStep.h"
+#include "EventMouse.h"
+#include "EventView.h"
+#include "EventKeyboard.h"
 
 Card::Card() {
 	name = "Basic Name";
@@ -9,7 +13,19 @@ Card::Card() {
 	text = "This is a very basic card that does nothing";
 	type = "Spell";
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
+	location = Location::DECK;
+
+	setSprite("card");
+
+	registerInterest(df::KEYBOARD_EVENT);
+	registerInterest(df::STEP_EVENT);
+	registerInterest(df::MSE_EVENT);
+
+
+	setType("Card");
+
+	df::Vector p(20, WM.getBoundary().getVertical() / 2);
+	setPosition(p);
 }
 Card::Card(std::string new_name, int new_cost, std::string new_type, std::string new_text) {
 	name = new_name;
@@ -17,7 +33,7 @@ Card::Card(std::string new_name, int new_cost, std::string new_type, std::string
 	type = new_type;
 	text = new_text;
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
+	location = Location::DECK;
 }
 
 // Setters

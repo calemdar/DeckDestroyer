@@ -7,7 +7,7 @@
 #define HEALTH_STRING "Health"
 
 // Global Defaults
-int STARTING_HEALTH = 100;
+const int STARTING_HEALTH = 100;
 
 class Health : public df::ViewObject {
 

@@ -7,7 +7,7 @@
 #include "Location.h"
 
 // DEFAULTS
-df::Color DEFAULT_CARD_COLOR = df::Color::GREEN;
+const df::Color DEFAULT_CARD_COLOR = df::Color::GREEN;
 
 
 class Card : public df::Object {
