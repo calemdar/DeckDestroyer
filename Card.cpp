@@ -36,6 +36,9 @@ void Card::setText(std::string new_text) {
 void Card::setColor(df::Color new_color) {
 	color = new_color;
 }
+void Card::setLocation(Location new_location) {
+	location = new_location;
+}
 
 // Getters
 std::string Card::getName() const {
@@ -53,12 +56,13 @@ std::string Card::getText() const {
 df::Color Card::getColor() const {
 	return color;
 }
+Location Card::getLocation() const{
+	return location;
+}
 
 void Card::play() {
 	// play card 
 
-	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Health", -1, true);
-	WM.onEvent(&ev);
+	
 	return;
 }

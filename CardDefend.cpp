@@ -3,10 +3,12 @@
 CardDefend::CardDefend() {
 	block = 1;
 	setType("Defend");
-	setText("Does %d damage.");
+	setText("Blocks %d health.");
 }
 CardDefend::CardDefend(int new_block) {
 	block = new_block;
+	setType("Defend");
+	setText("Blocks %d health.");
 }
 
 // Setters

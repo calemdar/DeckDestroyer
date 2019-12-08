@@ -6,11 +6,11 @@
 #include "Sprite.h"
 #include "Location.h"
 
-// DEFAULTS
-df::Color DEFAULT_CARD_COLOR = df::Color::GREEN;
+
 
 
 class Card : public df::Object {
+	
 private:
 	std::string name;			// Card name
 	int cost;					// Card cost to play
@@ -29,6 +29,7 @@ public:
 	void setText(std::string new_text);
 	void setType(std::string new_type);
 	void setColor(df::Color new_color);
+	void setLocation(Location new_location);
 
 	// Getters
 	std::string getName() const;
@@ -36,8 +37,12 @@ public:
 	std::string getText() const;
 	std::string getType() const;
 	df::Color getColor() const;
-
+	Location getLocation() const;
+	
 	virtual void play();
+
+	// DEFAULTS
+	df::Color DEFAULT_CARD_COLOR = df::Color::GREEN;
 
 };
 

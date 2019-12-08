@@ -4,16 +4,17 @@
 #include "Event.h"
 #include "ViewObject.h"
 
+// Global Defaults
+#define STARTING_HEALTH 100
 #define HEALTH_STRING "Health"
 
-// Global Defaults
-int STARTING_HEALTH = 100;
 
 class Health : public df::ViewObject {
 
 public:
 	Health();
 	int eventHandler(const df::Event* p_e);
+	
 };
 
 #endif // !_HEALTH_H_

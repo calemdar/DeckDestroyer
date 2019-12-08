@@ -8,7 +8,6 @@ class  CardDefend : public Card {
 private:
 	int block;
 	
-
 public:
 	CardDefend();
 	CardDefend(int new_block);

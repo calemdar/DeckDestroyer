@@ -1,6 +1,7 @@
 #include "CardAttack.h"
 #include "EventView.h"
 #include "WorldManager.h"
+#include "LogManager.h"
 
 CardAttack::CardAttack() {
 	damage = 1;
@@ -27,7 +28,8 @@ int CardAttack::getDamage() const{
 void CardAttack::play() {
 	// Do damage
 	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Health", - damage, true);
+	df::EventView ev("Health", - getDamage(), true);
 	WM.onEvent(&ev);
+	LM.writeLog("Event sent -%d Damage", getDamage());
 	return;
 }

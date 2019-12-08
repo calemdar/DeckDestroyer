@@ -7,6 +7,18 @@
 class CardAttack : public Card {
 private:
 	int damage;
-	Location location;
+
+public:
+	CardAttack();
+	CardAttack(int new_damage);
+
+	// Setters
+	void setDamage(int new_damage);
+	
+
+	// Getters
+	int getDamage()const;
+
+	void play();
 };
 #endif // !_CARDATTACK_H_

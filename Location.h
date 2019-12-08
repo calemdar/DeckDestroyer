@@ -1,5 +1,5 @@
 #ifndef _LOCATION_H_
-#define _LOCATOPN_H_
+#define _LOCATION_H_
 
 enum Location {
 	HAND,
