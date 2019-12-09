@@ -73,10 +73,10 @@ Card* Player::drawCard() {
 	Card* drawn = deck[(deck.size() - 1)];
 	int x = 50;
 	int y = 45;
-	int i = hand.size();
+	int i = 5-hand.size();
 
-	//drawn->moveTo(df::Vector(x + 5 * i, y - i));
-	drawn->setVelocity(df::Vector(1,0));
+	drawn->setPosition(df::Vector(x + 25 * i, y ));
+	//drawn->setVelocity(df::Vector(1,0));
 	//drawn->doPathFollowing();
 
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
