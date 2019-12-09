@@ -13,6 +13,7 @@
 Player::Player() {
 
 	setSprite("player");
+	setType("player");
 	setPosition(df::Vector(30, 20));
 	reticle = Reticle();
 	health.setViewString("Player Health");
