@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "ResourceManager.h"
 #include <EventKeyboard.h>
+#include "Enemy.h"
 
 GameStart::GameStart() {
 	setType("GameStart");
@@ -39,20 +40,8 @@ int GameStart::eventHandler(const df::Event* p_e) {
 
 void GameStart::start() {
 	// Create card.
+	Enemy* enemy = new Enemy;
 	Player* p = new Player;
-
-	// Setup heads-up display.
-	df::ViewObject* p_vo = new df::ViewObject; // Health.
-	p_vo->setLocation(df::TOP_LEFT);
-	p_vo->setViewString("Health");
-	p_vo->setValue(100);
-	p_vo->setColor(df::YELLOW);
-
-	df::ViewObject* p_vo2 = new df::ViewObject; // Mana.
-	p_vo2->setLocation(df::TOP_CENTER);
-	p_vo2->setViewString("Mana");
-	p_vo2->setValue(5);
-	p_vo2->setColor(df::YELLOW);
 
 	// When game starts, become inactive.
 	setActive(false);

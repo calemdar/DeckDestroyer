@@ -24,12 +24,14 @@ int CardAttack::getDamage() const{
 	return damage;
 }
 
+
 // Play card 
 void CardAttack::play() {
 	// Do damage
 	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Health", - getDamage(), true);
+	df::EventView ev("Enemy Health", - getDamage(), true);
 	WM.onEvent(&ev);
 	LM.writeLog("Event sent -%d Damage", getDamage());
+	WM.markForDelete(this);
 	return;
 }
