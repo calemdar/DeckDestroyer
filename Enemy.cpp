@@ -17,8 +17,13 @@ int Enemy::doDamage() {
 	df::EventView ev("Health", -getDamage(), true);
 	WM.onEvent(&ev);
 	LM.writeLog("Event sent -%d Damage", getDamage());
+	return attack_damage;
 }
 
 // Getters
-Health Enemy::getHealth() const;
-int Enemy::getDamage() const;
+Health Enemy::getHealth() const {
+	return enemy_health;
+}
+int Enemy::getDamage() const {
+	return attack_damage;
+}
