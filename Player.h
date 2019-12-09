@@ -41,8 +41,5 @@ public:
 	std::vector<Card*> getDeck();
 	std::vector<Card*> getHand();
 	std::vector<Card*> getDiscard();
-
-
-
 };
 #endif

@@ -19,6 +19,8 @@ public:
 	// Getters
 	int getDamage()const;
 
+	Location location;
+
 	void play();
 };
 #endif // !_CARDATTACK_H_

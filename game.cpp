@@ -15,13 +15,11 @@
 #include "Health.h"
 #include "Reticle.h"
 #include "Player.h"
+#include "Star.h"
+#include "GameStart.h"
 
 
 
-void loadSprites() {
-	RM.loadSprite("sprites/card-spr.txt", "strike");
-	RM.loadSprite("sprites/player-spr.txt", "player");
-}
 
 void testCards() {
 	
@@ -39,12 +37,6 @@ void testCards() {
 
 	player->setSprite("player");
 	player->setPosition(df::Vector(30,20));
-
-	
-
-	GM.run();
-
-	
 }
 
 void setUpWorld() {
@@ -52,6 +44,32 @@ void setUpWorld() {
 	WM.setView(df::Box(df::Vector(0, 0), 200, 200));
 }
 
+// Load game resources.
+void loadResources(void) {
+	// Load sprites
+	//RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+	//RM.loadSprite("sprites/ship-spr.txt", "ship");
+	RM.loadSprite("sprites/card-spr.txt", "card");
+	//RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
+	//RM.loadSprite("sprites/explosion-spr.txt", "explosion");
+	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
+	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+	//RM.loadSprite("sprites/game-win-spr.txt", "game-win");
+
+	RM.loadMusic("sounds/start-music.wav", "start music");
+}
+// Populate game world with some objects.
+void populateWorld(void) {
+	// Create some Stars.
+	for (int i = 0; i < 16; i++)
+		new Star;
+
+	// Enable player to pause game.
+	//new df::Pause(df::Keyboard::F10);
+
+	// Spawn GameStart object.
+	new GameStart();
+}
 int main(int argc, char *argv[]) {
 
   // Start up game manager.
@@ -71,10 +89,17 @@ int main(int argc, char *argv[]) {
   df::splash();
 
   // Load assets
-  loadSprites();
   setUpWorld();
 
   testCards();
+
+  // Load game resources.
+  loadResources();
+
+  // Populate game world with some objects.
+  populateWorld();
+
+  GM.run();
 
   // Shut everything down.
   GM.shutDown();

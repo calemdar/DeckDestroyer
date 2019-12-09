@@ -57,7 +57,6 @@ int Reticle::eventHandler(const df::Event* p_e) {
 			setPosition(p_mouse_event->getMousePosition());
 			return 1;
 		}
-		
 	}
 
 	// If get here, have ignored this event.

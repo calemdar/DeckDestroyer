@@ -3,22 +3,38 @@
 #include "EventView.h"
 #include "WorldManager.h"
 #include "LogManager.h"
+#include "EventStep.h"
+#include "EventMouse.h"
+#include "EventKeyboard.h"
 
 Card::Card() {
 	name = "Basic Name";
 	cost = 1;
 	text = "This is a very basic card that does nothing";
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
+	location = Location::DECK;
+
+	setSprite("card");
+	setSolidness(df::SOFT);
+
+	registerInterest(df::KEYBOARD_EVENT);
+	registerInterest(df::STEP_EVENT);
+	registerInterest(df::MSE_EVENT);
+
+
 	setType("Card");
+}
+void Card::setCardPosition(int x,int y) {
+	df::Vector p(x, y);
+	setPosition(p);
 }
 Card::Card(std::string new_name, int new_cost, std::string new_type, std::string new_text) {
 	name = new_name;
 	cost = new_cost;
 	text = new_text;
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
 	setType(new_type);
+	location = Location::DECK;
 }
 
 // Setters
