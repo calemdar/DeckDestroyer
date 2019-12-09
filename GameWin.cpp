@@ -34,5 +34,5 @@ GameWin::GameWin() {
 
 // Play start music.
 void GameWin::playMusic() {
-	p_music->play();
+	p_music->play(false);
 }
