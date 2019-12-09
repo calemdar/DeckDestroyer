@@ -59,6 +59,7 @@ void loadResources(void) {
 	RM.loadSprite("sprites/game-win-spr.txt", "game-win");
 
 	RM.loadMusic("sounds/start-music.wav", "start music");
+	RM.loadMusic("sounds/start-music.wav", "win music");
 }
 // Populate game world with some objects.
 void populateWorld(void) {

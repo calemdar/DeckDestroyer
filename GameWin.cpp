@@ -10,8 +10,8 @@ GameWin::GameWin() {
 	setSprite("game-win");
 	setPosition(df::Vector(100, 30));
 	//registerInterest(df::KEYBOARD_EVENT);  // Play start music.
-	//p_music = RM.getMusic("start music");
-	//playMusic();
+	p_music = RM.getMusic("win music");
+	playMusic();
 
 	const df::ObjectList obj_under_pointer = WM.getAllObjects();
 	LM.writeLog("Start Removing all objects!");
@@ -30,4 +30,9 @@ GameWin::GameWin() {
 			li.next();
 		}
 	}	
+}
+
+// Play start music.
+void GameWin::playMusic() {
+	p_music->play();
 }
