@@ -18,7 +18,7 @@ private:
 public:
 	Enemy();
 
-	// Do damage
+	// Does damage to the player
 	int doDamage();
 
 	// Getters

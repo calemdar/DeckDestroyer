@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include <EventKeyboard.h>
 #include "Enemy.h"
+#include "Turn.h"
 
 GameStart::GameStart() {
 	setType("GameStart");
@@ -42,6 +43,14 @@ void GameStart::start() {
 	// Create card.
 	Enemy* enemy = new Enemy;
 	Player* p = new Player;
+	Turn* turn = new Turn;
+
+	
+	df::ViewObject* p_vo2 = new df::ViewObject; // Mana.
+	p_vo2->setLocation(df::TOP_CENTER);
+	p_vo2->setViewString("Mana");
+	p_vo2->setValue(5);
+	p_vo2->setColor(df::YELLOW);
 
 	// When game starts, become inactive.
 	setActive(false);

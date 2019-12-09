@@ -24,7 +24,6 @@ int CardAttack::getDamage() const{
 	return damage;
 }
 
-
 // Play card 
 void CardAttack::play() {
 	// Do damage
@@ -32,6 +31,5 @@ void CardAttack::play() {
 	df::EventView ev("Enemy Health", - getDamage(), true);
 	WM.onEvent(&ev);
 	LM.writeLog("Event sent -%d Damage", getDamage());
-	WM.markForDelete(this);
 	return;
 }

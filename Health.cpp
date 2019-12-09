@@ -11,6 +11,7 @@ Health::Health() {
 	setViewString(HEALTH_STRING);
 	setColor(df::YELLOW);
 	setValue(STARTING_HEALTH);
+	setType("Health");
 }
 
 // Handle event.
