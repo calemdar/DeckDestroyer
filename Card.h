@@ -15,7 +15,6 @@ private:
 	std::string name;			// Card name
 	int cost;					// Card cost to play
 	std::string text;			// Card text explaining card effect
-	std::string type;			// Card type (Attack, Defend, Spell)
 	df::Color color;			// Card Color
 	Location location;
 
@@ -27,7 +26,6 @@ public:
 	void setName(std::string new_name);
 	void setCost(int new_cost);
 	void setText(std::string new_text);
-	void setType(std::string new_type);
 	void setColor(df::Color new_color);
 	void setLocation(Location new_location);
 
@@ -35,7 +33,6 @@ public:
 	std::string getName() const;
 	int getCost() const;
 	std::string getText() const;
-	std::string getType() const;
 	df::Color getColor() const;
 	Location getLocation() const;
 	

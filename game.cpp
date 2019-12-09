@@ -14,25 +14,32 @@
 #include "CardSpell.h"
 #include "Health.h"
 #include "Reticle.h"
+#include "Player.h"
 
 
 
 void loadSprites() {
 	RM.loadSprite("sprites/card-spr.txt", "strike");
+	RM.loadSprite("sprites/player-spr.txt", "player");
 }
 
 void testCards() {
 	
 
-	CardAttack attack = CardAttack(5);
+	CardAttack* attack = new CardAttack();
 	Health health = Health();
 	Reticle p = Reticle();
+	Player* player = new Player();
 
-	attack.setName("Strike");
-	attack.setText("Does 5 damage");
-	attack.setSprite("strike");
-	attack.setPosition(df::Vector(20,10));
-	attack.play();
+	attack->setName("Strike");
+	attack->setText("Does 5 damage");
+	attack->setSprite("strike");
+	attack->setPosition(df::Vector(20,40));
+	attack->play();
+
+	player->setSprite("player");
+	player->setPosition(df::Vector(30,20));
+
 	
 
 	GM.run();
@@ -42,7 +49,7 @@ void testCards() {
 
 void setUpWorld() {
 	WM.setBoundary(df::Box(df::Vector(0, 0), 200, 200));
-	WM.setView(df::Box(df::Vector(0, 0), 100, 100));
+	WM.setView(df::Box(df::Vector(0, 0), 200, 200));
 }
 
 int main(int argc, char *argv[]) {
