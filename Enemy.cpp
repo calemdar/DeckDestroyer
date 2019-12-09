@@ -8,14 +8,13 @@
 Enemy::Enemy() {
 	enemy_health = Health();
 	enemy_health.setValue(ENEMY_HEALTH);
-	enemy_health.setLocation(df::TOP_RIGHT); 
 	enemy_health.setViewString("Enemy Health");
 
 	attack_damage = 10;
 
 	setSprite("enemy");
-	setPosition(df::Vector(150, 20));
 	setType("enemy");
+	setPosition(df::Vector(150, 20));
 }
 
 // Do damage
