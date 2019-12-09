@@ -14,15 +14,7 @@ Card::Card() {
 	color = DEFAULT_CARD_COLOR;
 	location = Location::DECK;
 
-	setSprite("card");
-	setSolidness(df::SOFT);
-
-	registerInterest(df::KEYBOARD_EVENT);
-	registerInterest(df::STEP_EVENT);
-	registerInterest(df::MSE_EVENT);
-
-
-	setType("Card");
+	setupSprite();
 }
 void Card::setCardPosition(int x,int y) {
 	df::Vector p(x, y);
@@ -35,6 +27,16 @@ Card::Card(std::string new_name, int new_cost, std::string new_type, std::string
 	color = DEFAULT_CARD_COLOR;
 	setType(new_type);
 	location = Location::DECK;
+	setupSprite();
+}
+void Card::setupSprite() {
+	setSprite("card");
+	setSolidness(df::SOFT);
+	setType("Card");
+
+	registerInterest(df::KEYBOARD_EVENT);
+	registerInterest(df::STEP_EVENT);
+	registerInterest(df::MSE_EVENT);
 }
 
 // Setters

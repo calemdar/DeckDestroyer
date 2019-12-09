@@ -9,6 +9,7 @@
 #include "Card.h"
 #include "Health.h"
 #include "Event.h"
+#include "Reticle.h"
 
 class Player : public df::Object {
 private:
@@ -18,6 +19,7 @@ private:
 	std::vector<Card*> discard;
 
 	Health health;
+	Reticle reticle;
 
 public:
 	Player();

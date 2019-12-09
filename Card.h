@@ -23,6 +23,7 @@ public:
 	Card();
 	Card(std::string new_name, int new_cost, std::string new_type, std::string new_text);
 	void setCardPosition(int x,int y);
+	void setupSprite();
 	// Setters
 	void setName(std::string new_name);
 	void setCost(int new_cost);

@@ -1,14 +1,20 @@
 #include <algorithm>  // for shuffle
 #include "Player.h"
 #include "Card.h"
+#include "CardAttack.h"
 #include "Location.h"
 #include "LogManager.h"
 #include "Windows.h"
 #include <Clock.h>
-#include <Vector.h>
+#include "Vector.h"
+#include "Reticle.h"
 
 
 Player::Player() {
+
+	setSprite("player");
+	setPosition(df::Vector(30, 20));
+	reticle = Reticle();
 
 	// Basic card
 	permanent_deck.clear();
@@ -17,7 +23,7 @@ Player::Player() {
 	discard.clear();
 
 	for (int i = 0; i < 10; i++) {
-		Card* attack = new Card("Strike", 2, "Attack", "Does 5 damage");
+		CardAttack* attack = new CardAttack();
 		// Populate deck by default
 		addCard(attack);
 	}

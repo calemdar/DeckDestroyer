@@ -50,6 +50,7 @@ void loadResources(void) {
 	//RM.loadSprite("sprites/saucer-spr.txt", "saucer");
 	//RM.loadSprite("sprites/ship-spr.txt", "ship");
 	RM.loadSprite("sprites/card-spr.txt", "card");
+	RM.loadSprite("sprites/player-spr.txt", "player");
 	//RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
 	//RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
@@ -89,9 +90,9 @@ int main(int argc, char *argv[]) {
   df::splash();
 
   // Load assets
-  setUpWorld();
+  //setUpWorld();
 
-  testCards();
+  //testCards();
 
   // Load game resources.
   loadResources();
