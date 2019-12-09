@@ -28,7 +28,7 @@ int CardAttack::getDamage() const{
 void CardAttack::play() {
 	// Do damage
 	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Health", - getDamage(), true);
+	df::EventView ev("Enemy Health", - getDamage(), true);
 	WM.onEvent(&ev);
 	LM.writeLog("Event sent -%d Damage", getDamage());
 	return;

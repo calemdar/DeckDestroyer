@@ -17,8 +17,7 @@
 #include "Player.h"
 #include "Star.h"
 #include "GameStart.h"
-
-
+#include "Enemy.h"
 
 
 void testCards() {
@@ -28,6 +27,7 @@ void testCards() {
 	Health health = Health();
 	Reticle p = Reticle();
 	Player* player = new Player();
+	Enemy* enemy = new Enemy();
 
 	attack->setName("Strike");
 	attack->setText("Does 5 damage");
@@ -51,11 +51,12 @@ void loadResources(void) {
 	//RM.loadSprite("sprites/ship-spr.txt", "ship");
 	RM.loadSprite("sprites/card-spr.txt", "card");
 	RM.loadSprite("sprites/player-spr.txt", "player");
+	RM.loadSprite("sprites/enemy-spr.txt", "enemy");
 	//RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
 	//RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
-	//RM.loadSprite("sprites/game-win-spr.txt", "game-win");
+	RM.loadSprite("sprites/game-win-spr.txt", "game-win");
 
 	RM.loadMusic("sounds/start-music.wav", "start music");
 }

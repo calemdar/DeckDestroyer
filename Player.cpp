@@ -15,6 +15,8 @@ Player::Player() {
 	setSprite("player");
 	setPosition(df::Vector(30, 20));
 	reticle = Reticle();
+	health.setViewString("Player Health");
+	health.setLocation(df::TOP_LEFT);
 
 	// Basic card
 	permanent_deck.clear();
