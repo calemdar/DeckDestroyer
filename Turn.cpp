@@ -3,6 +3,7 @@
 #include "ObjectList.h"
 #include "ObjectListIterator.h"
 #include "Enemy.h"
+#include "LogManager.h"
 
 Turn::Turn() {
 	setPosition(df::Vector(100, 25));

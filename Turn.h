@@ -3,6 +3,7 @@
 
 #include"ViewObject.h"
 #include "WorldManager.h"
+#include "LogManager.h"
 
 enum TurnPointer {
 	PLAYER,

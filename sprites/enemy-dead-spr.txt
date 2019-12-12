@@ -1,0 +1,22 @@
+<HEADER>
+frames 1
+width 14
+height 9
+color blue
+slowdown 10
+</HEADER>
+<BODY>
+     .-"-.    
+    /_ _  \   
+    \X X  /   
+    (_> _)    
+      `)(_    
+      /((_`)_,
+      \__(/-" 
+     __|||__  
+    ((__|__)) 
+end
+</BODY>
+<FOOTER>
+version 1
+</FOOTER>

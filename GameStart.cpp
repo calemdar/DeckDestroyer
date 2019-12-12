@@ -48,7 +48,7 @@ void GameStart::start() {
 	// When game starts, become inactive.
 	setActive(false);
 	// Pause start music.
-	p_music->pause();
+	//p_music->pause();
 }
 
 // Override default draw so as not to display "value".

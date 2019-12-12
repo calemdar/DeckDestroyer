@@ -6,13 +6,10 @@
 #include "Location.h"
 #include "ResourceManager.h"
 #include "ViewObject.h"
-#include <Music.h>
 
 class GameWin : public df::Object {
 public:
 	GameWin();
-	df::Music* p_music;
-	void playMusic();
 	
 };
 

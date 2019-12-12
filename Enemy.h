@@ -15,6 +15,8 @@ class Enemy : public df::Object {
 private:
 	Health enemy_health;
 	int attack_damage;
+	std::vector<std::string> sprite_names;
+	int sprite_iterator;
 public:
 	Enemy();
 
@@ -24,5 +26,11 @@ public:
 	// Getters
 	Health getHealth() const;
 	int getDamage() const;
+	// Called when enemy health reaches 0
+	void die();
+	// Event Handler return 0 if no problem
+	int eventHandler(const df::Event* p_e);
+	// Spawns new enemy
+	void changeEnemy();
 };
 #endif
