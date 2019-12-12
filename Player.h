@@ -27,11 +27,20 @@ public:
 	// Add cards to permanent deck
 	void addCard(Card* new_card);
 
+	// display Card at (x,y)
+	void displayCard(Card* card, int x, int y);
+
 	// Draw card from deck into hand
 	Card* drawCard();
 
-	// Play Card, put it in the discard pile
-	void playCard();
+	// Draw card from deck into hand
+	bool canDraw();
+
+	// Draw upto 5 card from deck into hand
+	void draw5Cards();
+
+	// Move played card to the discard pile
+	void discardCard(Card* card);
 
 	// Shuffle cards
 	std::vector<Card*> shuffle(std::vector<Card*> cards);

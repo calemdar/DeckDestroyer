@@ -45,6 +45,8 @@ void GameStart::start() {
 	Player* p = new Player;
 	Turn* turn = new Turn;
 
+	RM.unloadSprite("sprites/gamestart-spr.txt");
+
 	// When game starts, become inactive.
 	setActive(false);
 	// Pause start music.

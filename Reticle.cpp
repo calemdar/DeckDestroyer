@@ -52,6 +52,7 @@ int Reticle::eventHandler(const df::Event* p_e) {
 					if (li.currentObject()->getType() == "Turn") {
 						Turn* turn_button = dynamic_cast <Turn*> (li.currentObject());
 						turn_button->endTurn();
+						LM.writeLog("end Turn!");
 					}
 					li.next();
 				}

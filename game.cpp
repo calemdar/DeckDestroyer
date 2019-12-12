@@ -47,27 +47,23 @@ void setUpWorld() {
 // Load game resources.
 void loadResources(void) {
 	// Load sprites
-	//RM.loadSprite("sprites/saucer-spr.txt", "saucer");
-	//RM.loadSprite("sprites/ship-spr.txt", "ship");
 	RM.loadSprite("sprites/card-spr.txt", "card");
 	RM.loadSprite("sprites/player-spr.txt", "player");
 	RM.loadSprite("sprites/enemy-spr.txt", "enemy1");
 	RM.loadSprite("sprites/enemy-dead-spr.txt", "enemy1-dead");
 	RM.loadSprite("sprites/enemy2-spr.txt", "enemy2");
 	RM.loadSprite("sprites/enemy2-dead-spr.txt", "enemy2-dead");
-	//RM.loadSprite("sprites/card-strike-spr.txt", "card-strike");
-	//RM.loadSprite("sprites/explosion-spr.txt", "explosion");
+
 	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
-	RM.loadSprite("sprites/game-win-spr.txt", "game-win");
 
 	RM.loadMusic("sounds/start-music.wav", "start music");
 }
 // Populate game world with some objects.
 void populateWorld(void) {
 	// Create some Stars.
-	for (int i = 0; i < 16; i++)
-		new Star;
+	//for (int i = 0; i < 16; i++)
+	//	new Star;
 
 	// Enable player to pause game.
 	//new df::Pause(df::Keyboard::F10);

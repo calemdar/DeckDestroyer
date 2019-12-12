@@ -56,6 +56,16 @@ void Card::setLocation(Location new_location) {
 	location = new_location;
 }
 
+void Card::setClickable(bool new_clickable)
+{
+	clickable = new_clickable;
+}
+
+void Card::setPlayed(bool new_played)
+{
+	played = new_played;
+}
+
 // Getters
 std::string Card::getName() const {
 	return name;
@@ -71,6 +81,16 @@ df::Color Card::getColor() const {
 }
 Location Card::getLocation() const{
 	return location;
+}
+
+bool Card::getClickable() const
+{
+	return clickable;
+}
+
+bool Card::getPlayed() const
+{
+	return played;
 }
 
 void Card::play() {

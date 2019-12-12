@@ -3,7 +3,9 @@
 #include "ObjectList.h"
 #include "ObjectListIterator.h"
 #include "Enemy.h"
+#include "Player.h"
 #include "LogManager.h"
+#include "utility.h"
 
 Turn::Turn() {
 	setPosition(df::Vector(100, 25));
@@ -12,23 +14,15 @@ Turn::Turn() {
 	setType("Turn");
 	setValue(1);
 	turn = TurnPointer::PLAYER;
-	
 }
 
 // ends turn, changes turn pointer
 void Turn::endTurn() {
-	df::ObjectList obj = WM.getAllObjects();
-	df::ObjectListIterator li = df::ObjectListIterator(&obj);
-	Enemy* enemy;
-	li.first();
-	while (!li.isDone()) {
-		if (li.currentObject()->getType() == "enemy") {
-			enemy = dynamic_cast <Enemy*> (li.currentObject());
-			LM.writeLog("Enemy found");
-			break;
-		}
-		li.next();
-	}
+	LM.writeLog("end Turn!!!");
+	Enemy* enemy = dynamic_cast <Enemy*> (findMe("enemy"));
+	Player* player = dynamic_cast <Player*> (findMe("player"));
+
+
 	if (turn == TurnPointer::PLAYER) {
 		turn = TurnPointer::ENEMY;
 		enemy->doDamage();
@@ -36,6 +30,7 @@ void Turn::endTurn() {
 	}
 	else if (turn == TurnPointer::ENEMY) {
 		turn = TurnPointer::PLAYER;
+		player->draw5Cards();
 		setValue(1);
 	}
 }

@@ -10,7 +10,8 @@
 class GameWin : public df::Object {
 public:
 	GameWin();
-	
+	df::Music* p_music;
+	void playMusic();
 };
 
 #endif

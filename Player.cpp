@@ -8,6 +8,7 @@
 #include <Clock.h>
 #include "Vector.h"
 #include "Reticle.h"
+#include <WorldManager.h>
 
 
 Player::Player() {
@@ -34,12 +35,7 @@ Player::Player() {
 	df::Clock mytimer = df::Clock();
 	mytimer.delta();
 
-	for (int i = 0; i < 5; i++) {
-		//while (mytimer.split() < 500);
-		drawCard();
-		mytimer.delta();
-	}
-
+	draw5Cards();
 }
 
 // Getters
@@ -61,11 +57,17 @@ void Player::addCard(Card* new_card) {
 	int x = 20;
 	int y = 45;
 	int i = deck.size();
-	new_card->setCardPosition(x+i, y-i);
+	new_card->setCardPosition(x+i, y-i-2);
 	new_card->setVisible(true);
+	new_card->setClickable(false);
 
 	permanent_deck.push_back(new_card);
 	deck.push_back(new_card);
+}
+void Player::displayCard(Card* card, int x, int y) {
+
+	card->setPosition(df::Vector(x, y));
+	card->setClickable(true);
 }
 
 // Draw card from deck into hand
@@ -74,10 +76,11 @@ Card* Player::drawCard() {
 	Card* drawn = deck[(deck.size() - 1)];
 	int x = 50;
 	int y = 45;
+
 	int i = hand.size();
 
-	//drawn->moveTo(df::Vector(x + 5 * i, y - i));
-	drawn->setVelocity(df::Vector(1,0));
+	displayCard(drawn, x + 25 * i, y);
+
 	//drawn->doPathFollowing();
 
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
@@ -90,17 +93,62 @@ Card* Player::drawCard() {
 	return drawn;
 }
 
-// Play Card, put it in the discard pile
-void Player::playCard() {
+void Player::draw5Cards()
+{
+	LM.writeLog("DRAW 5 CARDS!!!");
+	// delete displayed cards
+	for (int i = 0; i < hand.size(); i++) {
+		Card* card = hand[i];
+		if (card->getPlayed()) {
+			LM.writeLog("CARD %d WAS PLAYED!!!",i);
+			for (int j = i + 1;j < hand.size();j++) {
+				hand[j - 1] = hand[j];
+			}
+			hand.pop_back();
+			i--;
+		}
+		else {
+			LM.writeLog("Card not played, will be moved");
+		}
+	}
+
+	LM.writeLog("DRAW not played %d CARDS!!!",int(hand.size()));
+
+	// redraw not played cards
+	for (int i = 0; i < hand.size(); i++) {
+		int x = 50;
+		int y = 45;
+
+		int ii = i;
+		displayCard(hand[i], x + 25 * ii, y);
+	}
+
+	// draw new cards up to 5
+	while (canDraw() && hand.size() < 5) {
+		drawCard();
+	}
+}
+
+bool Player::canDraw() {
+	return (deck.size() > 0);
+}
+
+// Move played card to the discard pile
+void Player::discardCard(Card* card) {
 	// Get last element 
-	Card* drawn = deck.at(deck.size() - 1);
-	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
+	LM.writeLog("Discard card with name %s", card->getName().c_str());
 
-	// add to hand
-	hand.push_back(drawn);
+	// add to discard pile
+	int x = 50;
+	int y = 45;
 
-	// remove from deck
-	deck.pop_back();
+	card->setCardPosition(0, 0);
+	card->setVisible(false);
+
+	Card* newcard = new Card();
+	discard.push_back(newcard);
+	displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
+	newcard->setClickable(false);
 }
 
 // Shuffle cards

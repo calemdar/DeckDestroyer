@@ -15,7 +15,7 @@ class Enemy : public df::Object {
 private:
 	Health enemy_health;
 	int attack_damage;
-	std::vector<std::string> sprite_names;
+	std::vector<std::string> sprite_names,sprite_path;
 	int sprite_iterator;
 public:
 	Enemy();
