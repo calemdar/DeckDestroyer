@@ -170,7 +170,7 @@ void Player::draw5Cards()
 	// delete displayed cards
 	for (int i = 0; i < hand.size(); i++) {
 		Card* card = hand[i];
-		if (card->getPlayed()) {
+		if (card->getPlayed() || card->getEaten()) {
 			if (deck.size() > 0) {
 				drawCard();
 			}
@@ -204,7 +204,7 @@ bool Player::canDraw() {
 }
 
 // Move played card to the discard pile
-void Player::discardCard(Card* card) {
+void Player::discardCard(Card* card, bool eaten) {
 	LM.writeLog("Discard card with name %s", card->getName().c_str());
 
 	// add to discard pile
@@ -233,9 +233,16 @@ void Player::discardCard(Card* card) {
 		newcard = new  CardDefend();
 		newcard->setSprite("card-block");
 	}
-
-	discard.push_back(newcard);
-	displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
+	if (!eaten) {
+		discard.push_back(newcard);
+		displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
+	}
+	else {
+		card->setEaten(true);
+		card->setPlayed(true);
+		eatenCards.push_back(newcard);
+		displayCard(newcard, x + 25 * 5 + eatenCards.size(), y - eatenCards.size() - 2 - 30);
+	}
 	newcard->setClickable(false);
 }
 

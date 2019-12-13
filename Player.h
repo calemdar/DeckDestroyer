@@ -21,6 +21,7 @@ private:
 	std::vector<Card*> permanent_deck;
 	std::vector<Card*> deck;
 	std::vector<Card*> discard;
+	std::vector<Card*> eatenCards;
 
 	Health health;
 	Reticle reticle;
@@ -45,7 +46,7 @@ public:
 	void draw5Cards();
 
 	// Move played card to the discard pile
-	void discardCard(Card* card);
+	void discardCard(Card* card, bool eaten=false);
 
 	// heal the player
 	void heal();

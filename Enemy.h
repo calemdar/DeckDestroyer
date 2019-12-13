@@ -29,6 +29,7 @@ public:
 	void setDamage(int new_damage);
 	// Getters
 	Health* getHealth();
+	int getSpriteIterator();
 	int getDamage() const;
 	// Called when enemy health reaches 0
 	void die();

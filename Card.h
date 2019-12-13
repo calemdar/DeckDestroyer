@@ -21,6 +21,7 @@ private:
 	bool clickable;
 	bool played = false;
 	std::string cardType;
+	bool eaten = false;
 
 public:
 	Card();
@@ -37,6 +38,7 @@ public:
 	void setClickable(bool new_clickable);
 	void setPlayed(bool new_played);
 	void setCardType(std::string new_type);
+	void setEaten(bool eat=true);
 
 	// Getters
 	std::string getName() const;
@@ -47,6 +49,7 @@ public:
 	bool getClickable() const;
 	bool getPlayed() const;
 	std::string getCardType() const;
+	bool getEaten() const;
 	
 	virtual void play();
 };

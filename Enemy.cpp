@@ -71,6 +71,10 @@ int Enemy::doDamage() {
 Health* Enemy::getHealth() {
 	return &enemy_health;
 }
+int Enemy::getSpriteIterator()
+{
+	return sprite_iterator;
+}
 int Enemy::getDamage() const {
 	return attack_damage;
 }
