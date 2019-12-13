@@ -1,54 +1,41 @@
 #include "GameOver.h"
-#include "GameStart.h"
-#include "GameManager.h"
-#include "LogManager.h"
+#include "Card.h"
+#include "Location.h"
 #include "ResourceManager.h"
 #include "WorldManager.h"
-#include "EventStep.h"
+#include "LogManager.h"
 
 GameOver::GameOver() {
+	RM.loadMusic("sounds/explode.wav", "game-over");
 	setType("GameOver");
-	// Link to "message" sprite.
-	if (setSprite("gameover") == 0)
-		time_to_live = getAnimation().getSprite()->getFrameCount() * getAnimation().getSprite()->getSlowdown();
-	else
-		time_to_live = 0;
+	setSprite("gameover");
+	setPosition(df::Vector(100, 30));
+	//registerInterest(df::KEYBOARD_EVENT);  // Play start music.
+	p_music = RM.getMusic("game-over");
+	playMusic();
 
-	// Put in center of window.
-	setLocation(df::CENTER_CENTER);
+	const df::ObjectList obj_under_pointer = WM.getAllObjects();
 
-	// Play "game over" sound.
-	df::Sound* p_sound = RM.getSound("game over");
-	p_sound->play();
-}
-
-// Count down to end of message.
-void GameOver::step() {
-	time_to_live--;
-	if (time_to_live <= 0)
-		WM.markForDelete(this);
-}
-
-// Override default draw so as not to display "value".
-int GameOver::draw() {
-	return df::Object::draw();
-}
-
-GameOver::~GameOver() {
-	// Remove Saucers and ViewObjects, re-activate GameStart.
-	df::ObjectList object_list = WM.getAllObjects(true);
-	df::ObjectListIterator i(&object_list);
-	for (i.first(); !i.isDone(); i.next()) {
-		df::Object* p_o = i.currentObject();
-		if (p_o->getType() == "Card" || p_o->getType() == "ViewObject")
-			WM.markForDelete(p_o);
-		if (p_o->getType() == "GameStart") {
-			p_o->setActive(true);
-			dynamic_cast <GameStart*> (p_o)->playMusic(); // Resume start music.
+	LM.writeLog("Start Removing all objects!");
+	if (!obj_under_pointer.isEmpty()) {
+		// Found an object	
+		df::ObjectListIterator li = df::ObjectListIterator(&obj_under_pointer);
+		li.first();
+		LM.writeLog("Object List Size: %d", obj_under_pointer.getCount());
+		while (!li.isDone()) {
+			LM.writeLog("Object Found %s", li.currentObject()->getType().c_str());
+			if (li.currentObject()->getType() == "Card"
+				|| li.currentObject()->getType() == "Player"
+				|| li.currentObject()->getType() == "Enemy"
+				|| li.currentObject()->getType() == "Turn") {
+				WM.markForDelete(li.currentObject());
+			}
+			li.next();
 		}
 	}
 }
 
-int GameOver::eventHandler(const df::Event* p_e) {
-	return 0;
+// Play start music.	
+void GameOver::playMusic() {
+	p_music->play(false);
 }

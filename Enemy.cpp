@@ -10,6 +10,7 @@
 #include "utility.h"
 #include "ViewObject.h"
 #include "Player.h"
+#include "GameOver.h"
 
 Enemy::Enemy() {
 	enemy_health = Health();
@@ -47,13 +48,17 @@ void Enemy::setDamage(int new_damage) {
 // Do damage
 int Enemy::doDamage() {
 	// Send "view" event to Heath HUD indicating damage.
+	df::ViewObject* player_health = dynamic_cast <df::ViewObject*> (findMe("Player Health"));
 	if (attack_damage > 0) {
-		df::ViewObject* player_health = dynamic_cast <df::ViewObject*> (findMe("Player Health"));
+		
 		int tmp_health = player_health->getValue();
 		player_health->setValue(tmp_health - attack_damage);
 	}
 	else {
 		setDamage(BASE_DAMAGE);
+	}
+	if (player_health->getValue() <= 0) {
+		new GameOver;
 	}
 
 	//df::EventView ev("Player Health", -getDamage(), true);

@@ -1,17 +1,18 @@
-//
-// GameOver.h
-//
+#ifndef _GAMEOVER_H_
+#define _GAMEOVER_H_
 
+#include "Object.h"
+#include "Card.h"
+#include "Location.h"
+#include "ResourceManager.h"
 #include "ViewObject.h"
 
-class GameOver : public df::ViewObject {
-private:
-	int time_to_live;
-	void step();
 
+class GameOver : public df::Object {
 public:
 	GameOver();
-	~GameOver();
-	int eventHandler(const df::Event* p_e);
-	int draw();
+	df::Music* p_music;
+	void playMusic();
 };
+
+#endif
