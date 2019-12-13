@@ -37,7 +37,7 @@ Player::Player() {
 
 	// Add cards to player
 	
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		//CardAttack* attack = new CardAttack();
 		// Populate deck by default
 		//addCard(attack);

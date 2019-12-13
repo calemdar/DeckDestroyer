@@ -49,6 +49,15 @@ void CardAttack::play() {
 
 	if (enemy_health->getValue() < 0) {
 		enemy->die();
+		Player* player = dynamic_cast <Player*> (findMe("Player"));
+
+		int handSize = player->getHand().size();
+		for (int i = 0;i < handSize;i++) {
+			Card* c = player->getHand()[i];
+			if (c->getPlayed() == false) {
+				c->setClickable(false);
+			}
+		}
 	}
 
 	//df::EventView ev("Enemy Health", - getDamage(), true);

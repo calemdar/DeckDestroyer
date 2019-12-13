@@ -9,6 +9,7 @@
 #include "GameWin.h"
 #include "utility.h"
 #include "ViewObject.h"
+#include "Player.h"
 
 Enemy::Enemy() {
 	enemy_health = Health();
@@ -104,6 +105,16 @@ int Enemy::eventHandler(const df::Event* p_e) {
 
 	if (p_e->getType() == df::OUT_EVENT) {
 		changeEnemy();
+		Player* player = dynamic_cast <Player*> (findMe("Player"));
+
+		int handSize = player->getHand().size();
+		for (int i = 0;i < handSize;i++) {
+			Card* c = player->getHand()[i];
+			if (c->getPlayed() == false) {
+				c->setClickable(true);
+			}
+		}
+		player->draw5Cards();
 		return 0;
 	}
 	/*
