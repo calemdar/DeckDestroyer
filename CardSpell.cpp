@@ -35,8 +35,6 @@ void CardSpell::play() {
 		return;
 	setPlayed(true);
 
-	LM.writeLog("Play Card Spell2");
-
 	// Play spell
 
 	Player* player = dynamic_cast <Player*> (findMe("Player"));

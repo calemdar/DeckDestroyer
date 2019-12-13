@@ -39,12 +39,12 @@ int Reticle::eventHandler(const df::Event* p_e) {
 				// Found an object
 				df::ObjectListIterator li = df::ObjectListIterator(&obj_under_pointer);
 				li.first();
-				LM.writeLog("Object List Size: %d", obj_under_pointer.getCount());
+				//LM.writeLog("Object List Size: %d", obj_under_pointer.getCount());
 				while (!li.isDone()) {
-					LM.writeLog("Object Found %s", li.currentObject()->getType().c_str());
+					//LM.writeLog("Object Found %s", li.currentObject()->getType().c_str());
 					if (li.currentObject()->getType() == "Card") {
 						Card* clicked_card = dynamic_cast <Card*> (li.currentObject());
-						LM.writeLog("Object is a card");
+						LM.writeLog("Object is a Card");
 
 						clicked_card->play();
 						break;
@@ -52,7 +52,7 @@ int Reticle::eventHandler(const df::Event* p_e) {
 					if (li.currentObject()->getType() == "Turn") {
 						Turn* turn_button = dynamic_cast <Turn*> (li.currentObject());
 						turn_button->endTurn();
-						LM.writeLog("end Turn!");
+						LM.writeLog("Object is a Turn");
 					}
 					li.next();
 				}

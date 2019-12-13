@@ -33,10 +33,6 @@ void Card::setupSprite() {
 	setSprite("card");
 	setSolidness(df::SOFT);
 	setType("Card");
-
-	registerInterest(df::KEYBOARD_EVENT);
-	registerInterest(df::STEP_EVENT);
-	registerInterest(df::MSE_EVENT);
 }
 
 // Setters

@@ -129,10 +129,6 @@ Card* Player::drawCard() {
 
 
 	for (int i = 0;i < hand.size();i++) {
-		LM.writeLog("Hand card %d %d",i, int(hand[i]->getPlayed()));
-	}
-
-	for (int i = 0;i < hand.size();i++) {
 		if (hand[i]->getPlayed()==true) {
 			hand[i] = drawn;
 			displayCard(drawn, x + 25 * i, y);
@@ -147,11 +143,6 @@ Card* Player::drawCard() {
 		hand.push_back(drawn);
 	}
 
-
-	for (int i = 0;i < hand.size();i++) {
-		LM.writeLog("NEW Hand card %d %d", i, int(hand[i]->getPlayed()));
-	}
-
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
 
 
@@ -160,7 +151,8 @@ Card* Player::drawCard() {
 
 void Player::draw5Cards()
 {
-	LM.writeLog("DRAW 5 CARDS!!!");
+	LM.writeLog("DRAW up to 5 cards. Fill empty spots!");
+
 	// delete displayed cards
 	for (int i = 0; i < hand.size(); i++) {
 		Card* card = hand[i];
@@ -169,7 +161,6 @@ void Player::draw5Cards()
 				drawCard();
 			}
 			else{
-				LM.writeLog("CARD %d WAS PLAYED!!!", i);
 				for (int j = i + 1;j < hand.size();j++) {
 					hand[j - 1] = hand[j];
 				}
@@ -177,12 +168,7 @@ void Player::draw5Cards()
 				i--;
 			}
 		}
-		else {
-			LM.writeLog("Card not played, will be moved");
-		}
 	}
-
-	LM.writeLog("DRAW not played %d CARDS!!!",int(hand.size()));
 
 	// redraw not played cards
 	for (int i = 0; i < hand.size(); i++) {
@@ -205,7 +191,6 @@ bool Player::canDraw() {
 
 // Move played card to the discard pile
 void Player::discardCard(Card* card) {
-	// Get last element 
 	LM.writeLog("Discard card with name %s", card->getName().c_str());
 
 	// add to discard pile
@@ -214,18 +199,14 @@ void Player::discardCard(Card* card) {
 
 	card->setCardPosition(1, 1);
 	card->setVisible(false);
-	
-	LM.writeLog("ABABA %s", card->getCardType().c_str());
 
 	Card* newcard;
 	if (card->getCardType() == "Attack") {
-		LM.writeLog("ABABA Card is |%s|", card->getCardType().c_str());
 		newcard = new  CardAttack();
 	}else
 	if (card->getCardType() == "Spell") {
 
 		if (card->getText() == "Draw one card") {
-			LM.writeLog("ABABAB Card is |%s|", card->getText().c_str());
 			newcard = new  CardSpell("Draw Card");
 			newcard->setSprite("cardDraw");
 		}

@@ -17,9 +17,6 @@ GameOver::GameOver() {
 	// Put in center of window.
 	setLocation(df::CENTER_CENTER);
 
-	// Register for step event.
-	registerInterest(df::STEP_EVENT);
-
 	// Play "game over" sound.
 	df::Sound* p_sound = RM.getSound("game over");
 	p_sound->play();
@@ -53,9 +50,5 @@ GameOver::~GameOver() {
 }
 
 int GameOver::eventHandler(const df::Event* p_e) {
-	if (p_e->getType() == df::STEP_EVENT) {
-		step();
-		return 1;
-	}
 	return 0;
 }

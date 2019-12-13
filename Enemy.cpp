@@ -84,7 +84,6 @@ void Enemy::die() {
 void Enemy::changeEnemy() {
 	// change to the next sprite
 	sprite_iterator++;
-	LM.writeLog("Sprite Iterator: %d", sprite_iterator);
 
 	if (sprite_names.size() > sprite_iterator) {
 		enemy_health.setValue(ENEMY_HEALTH);
