@@ -49,6 +49,7 @@ void loadResources(void) {
 	// Load sprites
 	RM.loadSprite("sprites/card-spr.txt", "card");
 	RM.loadSprite("sprites/cardDraw-spr.txt", "cardDraw");
+	RM.loadSprite("sprites/cardHeal-spr.txt", "cardHeal");
 	RM.loadSprite("sprites/card-smash-spr.txt", "card-smash");
 	RM.loadSprite("sprites/card-charge-spr.txt", "card-charge");
 	RM.loadSprite("sprites/card-block-spr.txt", "card-block");

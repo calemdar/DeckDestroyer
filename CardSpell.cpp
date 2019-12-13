@@ -12,10 +12,10 @@ CardSpell::CardSpell() {
 	setText("Draw one card");
 }
 CardSpell::CardSpell(std::string new_spell) {
-	spell_description = "Draw one card";
+	spell_description = new_spell;
 	setType("Card");
 	setCardType("Spell");
-	setText("Draw one card");
+	setText(new_spell);
 }
 
 // Setters
@@ -41,6 +41,10 @@ void CardSpell::play() {
 	if (getText() == "Draw one card") {
 		if(player->canDraw())
 			player->drawCard();
+	}
+	else 
+	if (getText() == "Heal") {
+		player->heal();
 	}
 
 	player->discardCard(this);
