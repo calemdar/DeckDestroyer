@@ -117,7 +117,9 @@ int Enemy::eventHandler(const df::Event* p_e) {
 
 	if (p_e->getType() == df::OUT_EVENT) {
 		changeEnemy();
+
 		Player* player = dynamic_cast <Player*> (findMe("Player"));
+		player->getMana()->setValue(4);
 
 		int handSize = player->getHand().size();
 		for (int i = 0;i < handSize;i++) {

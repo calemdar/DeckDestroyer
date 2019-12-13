@@ -39,13 +39,9 @@ Player::Player() {
 	// Add cards to player
 	
 	for (int i = 0; i < 3; i++) {
-		//CardAttack* attack = new CardAttack();
 		// Populate deck by default
-		//addCard(attack);
 
 		CardDefend* def = new CardDefend();
-		// Populate deck by default
-		addCard(def);
 		CardAttack* attack1 = new CardAttack(5);
 		CardAttack* attack2 = new CardAttack(10);
 		CardSpell* spell = new CardSpell("Draw one card");
@@ -58,32 +54,21 @@ Player::Player() {
 		attack3->setSprite("card-charge");
 		heal->setSprite("cardHeal");
 		
+		def->setCost(2);
 		attack1->setCost(1);
 		attack2->setCost(2);
 		attack3->setCost(4);
 
 		spell->setCost(1);
 		heal->setCost(2);
-		
+
+		addCard(def);
 		addCard(attack1);
 		addCard(attack2);
 		addCard(spell);
 		addCard(attack3);
 		addCard(heal);
 	}
-	
-	
-	CardDefend* def1 = new CardDefend(); 
-	CardDefend* def2 = new CardDefend();
-
-	def1->setCost(2);
-	def2->setCost(2);
-
-	addCard(def1);
-	addCard(def2);
-
-	df::Clock mytimer = df::Clock();
-	mytimer.delta();
 
 	draw5Cards();
 }
@@ -110,10 +95,10 @@ df::ViewObject* Player::getMana() {
 
 // Add cards to permanent deck
 void Player::addCard(Card* new_card) {
-	int x = 20;
+	int x = 15;
 	int y = 45;
 	int i = deck.size();
-	new_card->setCardPosition(x+i, y-i-2);
+	new_card->setCardPosition(x+i, y-i+2);
 	new_card->setVisible(true);
 	new_card->setClickable(false);
 
@@ -151,10 +136,12 @@ Card* Player::drawCard() {
 		}
 	}
 	if (flag == false) {
-		displayCard(drawn, x + 25 * i, y);
+		if (hand.size() < 5) {
+			displayCard(drawn, x + 25 * i, y);
 
-		// add to hand
-		hand.push_back(drawn);
+			// add to hand
+			hand.push_back(drawn);
+		}
 	}
 
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
@@ -235,7 +222,7 @@ void Player::discardCard(Card* card, bool eaten) {
 	}
 	if (!eaten) {
 		discard.push_back(newcard);
-		displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
+		displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() + 3);
 	}
 	else {
 		card->setEaten(true);

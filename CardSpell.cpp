@@ -40,6 +40,7 @@ void CardSpell::play() {
 
 	Player* player = dynamic_cast <Player*> (findMe("Player"));
 	if (getCost() <= player->getMana()->getValue()) {
+		setPlayed(true);
 		if (getText() == "Draw one card") {
 			if(player->canDraw())
 				player->drawCard();
@@ -50,7 +51,6 @@ void CardSpell::play() {
 		}
 	
 		LM.writeLog("Play Card Spell");
-		setPlayed(true);
 		
 		// use mana
 		df::EventView e_mana("Mana", -getCost(), true);
