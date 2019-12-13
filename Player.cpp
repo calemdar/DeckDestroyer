@@ -52,7 +52,7 @@ Player::Player() {
 
 		attack1->setSprite("card");
 		attack2->setSprite("card-smash");
-		card->setSprite("cardDraw");
+		spell->setSprite("cardDraw");
 		attack3->setSprite("card-charge");
 
 		addCard(attack1);
@@ -228,10 +228,10 @@ void Player::discardCard(Card* card) {
 			newcard = new  CardSpell("Draw Card");
 			newcard->setSprite("cardDraw");
 		}
-		else
-		if (card->getText() == "Heal") {
-			//newcard = new  CardSpell("Heal");
-		}
+	}else
+	if (card->getText() == "Blocks %d health.") {
+		newcard = new  CardDefend();
+		newcard->setSprite("card-block");
 	}
 
 	discard.push_back(newcard);
