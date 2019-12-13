@@ -67,6 +67,11 @@ void Card::setCardType(std::string new_type)
 	cardType = new_type;
 }
 
+void Card::setEaten(bool eat)
+{
+	eaten = eat;
+}
+
 // Getters
 std::string Card::getName() const {
 	return name;
@@ -97,6 +102,11 @@ bool Card::getPlayed() const
 std::string Card::getCardType() const
 {
 	return cardType;
+}
+
+bool Card::getEaten() const
+{
+	return eaten;
 }
 
 void Card::play() {
