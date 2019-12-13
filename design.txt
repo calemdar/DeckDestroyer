@@ -1,0 +1,54 @@
+Cem Alemdar - calemdar
+Nugzar Chkhaidze - nchkhaidze
+
+The Deck Destroyer is a card based adventure game. You are Heisenberg and you will face three monsters.
+In order to beat them you should use the cards which have special abilities.
+
+You can use three diferent type of cards. Attack, Defend, Spell.  
+    Attack cards do damage
+    Defend cards prevent taking damage for one turn
+    Spell cards do something special
+        Draw card gives you a new card
+        Heal increase the player's health
+In the beginning all cards are in the deck, which is located at the left bottom corner.
+Each turn 5 cards are drawn to the player. Or free spots for cards are filled up to 5 cards.
+All the used cards move to the discard pile located at the right bottom corner.
+
+Every card uses Mana, and mana regenerates after every turn (back and forth to the player), or when an
+enemy dies. There are three different enemies. To win against all, you have to use your cards wisely. 
+The game Ends if you die, or you kill all three enemies.
+The first enemy is easy - It only deals damage at its turn
+The second enemy is medium - It has more HP, deals damage and steals the card from player's hand
+The third enemy is hard (BOSS) - It has a lot of HP, deals damage and steals the card from player's hand
+If the enemy steals the card it gets stacked on top of the enemy.
+
+The cards in the deck are limited, you might run out of them. Show us what you've got!
+
+
+Some bugs we came across:
+- Enemies can steal cards that are not in the game sometimes
+- using some cards don't use the right amount of mana very rarely
+- you can play cards on the enemies turn
+
+Our plan was to have:
+Create 10 Attack, 10 Spell, and 10 Enchantment cards (Done 3 Attack, 2 Spell, 1 Defend)
+● What can cards do: 
+○ Damage (Done)
+○ Block  (Done)
+○ Poison
+○ Heal
+○ Freeze
+○ Buff damage
+○ Extra mana
+○ Draw card  (Done)
+● Playing cards exhaust a resource (mana or gems), refreshes every turn  (Done)
+● Create turn system to control game time  (Done)
+● Basic monster behaviour: Attack, Defend, buff, debuff (or maybe uses the cards as well) (Done attack and steal card)
+● Player and monster health (Done)
+● Player deck, hand, discard  (Done)
+
+We implemented all the core features for the game from our project plan.
+We wished to have more variability with the card sprites and different abilities, but we decided it was more important
+to implement the card system and the resource management, and to spend time debugging and polishing.
+
+We have a FUN game, exciting, balanced game.
