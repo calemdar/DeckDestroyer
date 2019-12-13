@@ -24,8 +24,7 @@ void Turn::endTurn() {
 
 	if (turn == TurnPointer::PLAYER) {
 		turn = TurnPointer::ENEMY;
-		enemy->doDamage();
-		if (enemy->getSpriteIterator() == 2) {
+		if (enemy->getSpriteIterator() >= 2) {
 			// EAT THE CARD
 			int flag = false;
 			int eatCard = rand() % 5;
@@ -48,6 +47,7 @@ void Turn::endTurn() {
 				}
 			}
 		}
+		enemy->doDamage();
 		setValue(0);
 	}
 	else if (turn == TurnPointer::ENEMY) {
