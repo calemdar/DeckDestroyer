@@ -15,13 +15,10 @@
 #include "Health.h"
 #include "Reticle.h"
 #include "Player.h"
+#include "Star.h"
+#include "GameStart.h"
+#include "Enemy.h"
 
-
-
-void loadSprites() {
-	RM.loadSprite("sprites/card-spr.txt", "strike");
-	RM.loadSprite("sprites/player-spr.txt", "player");
-}
 
 void testCards() {
 	
@@ -30,6 +27,7 @@ void testCards() {
 	Health health = Health();
 	Reticle p = Reticle();
 	Player* player = new Player();
+	Enemy* enemy = new Enemy();
 
 	attack->setName("Strike");
 	attack->setText("Does 5 damage");
@@ -39,12 +37,6 @@ void testCards() {
 
 	player->setSprite("player");
 	player->setPosition(df::Vector(30,20));
-
-	
-
-	GM.run();
-
-	
 }
 
 void setUpWorld() {
@@ -52,6 +44,38 @@ void setUpWorld() {
 	WM.setView(df::Box(df::Vector(0, 0), 200, 200));
 }
 
+// Load game resources.
+void loadResources(void) {
+	// Load sprites
+	RM.loadSprite("sprites/card-spr.txt", "card");
+	RM.loadSprite("sprites/card-smash-spr.txt", "card-smash");
+	RM.loadSprite("sprites/card-charge-spr.txt", "card-charge");
+	RM.loadSprite("sprites/card-block-spr.txt", "card-block");
+	
+
+	RM.loadSprite("sprites/player-spr.txt", "player");
+	RM.loadSprite("sprites/enemy-spr.txt", "enemy1");
+	RM.loadSprite("sprites/enemy-dead-spr.txt", "enemy1-dead");
+	RM.loadSprite("sprites/enemy2-spr.txt", "enemy2");
+	RM.loadSprite("sprites/enemy2-dead-spr.txt", "enemy2-dead");
+
+	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
+	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+
+	RM.loadMusic("sounds/start-music.wav", "start music");
+}
+// Populate game world with some objects.
+void populateWorld(void) {
+	// Create some Stars.
+	//for (int i = 0; i < 16; i++)
+	//	new Star;
+
+	// Enable player to pause game.
+	//new df::Pause(df::Keyboard::F10);
+
+	// Spawn GameStart object.
+	new GameStart;
+}
 int main(int argc, char *argv[]) {
 
   // Start up game manager.
@@ -71,10 +95,17 @@ int main(int argc, char *argv[]) {
   df::splash();
 
   // Load assets
-  loadSprites();
-  setUpWorld();
+  //setUpWorld();
 
-  testCards();
+  //testCards();
+
+  // Load game resources.
+  loadResources();
+
+  // Populate game world with some objects.
+  populateWorld();
+
+  GM.run();
 
   // Shut everything down.
   GM.shutDown();

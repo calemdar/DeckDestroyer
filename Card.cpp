@@ -3,22 +3,40 @@
 #include "EventView.h"
 #include "WorldManager.h"
 #include "LogManager.h"
+#include "EventStep.h"
+#include "EventMouse.h"
+#include "EventKeyboard.h"
 
 Card::Card() {
 	name = "Basic Name";
 	cost = 1;
 	text = "This is a very basic card that does nothing";
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
-	setType("Card");
+	location = Location::DECK;
+
+	setupSprite();
+}
+void Card::setCardPosition(int x,int y) {
+	df::Vector p(x, y);
+	setPosition(p);
 }
 Card::Card(std::string new_name, int new_cost, std::string new_type, std::string new_text) {
 	name = new_name;
 	cost = new_cost;
 	text = new_text;
 	color = DEFAULT_CARD_COLOR;
-	location = DECK;
 	setType(new_type);
+	location = Location::DECK;
+	setupSprite();
+}
+void Card::setupSprite() {
+	setSprite("card");
+	setSolidness(df::SOFT);
+	setType("Card");
+
+	registerInterest(df::KEYBOARD_EVENT);
+	registerInterest(df::STEP_EVENT);
+	registerInterest(df::MSE_EVENT);
 }
 
 // Setters
@@ -38,6 +56,16 @@ void Card::setLocation(Location new_location) {
 	location = new_location;
 }
 
+void Card::setClickable(bool new_clickable)
+{
+	clickable = new_clickable;
+}
+
+void Card::setPlayed(bool new_played)
+{
+	played = new_played;
+}
+
 // Getters
 std::string Card::getName() const {
 	return name;
@@ -53,6 +81,16 @@ df::Color Card::getColor() const {
 }
 Location Card::getLocation() const{
 	return location;
+}
+
+bool Card::getClickable() const
+{
+	return clickable;
+}
+
+bool Card::getPlayed() const
+{
+	return played;
 }
 
 void Card::play() {

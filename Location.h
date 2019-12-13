@@ -1,7 +1,7 @@
 #ifndef _LOCATION_H_
 #define _LOCATION_H_
 
-enum Location {
+enum class Location {
 	HAND,
 	DECK,
 	DISCARD,

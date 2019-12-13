@@ -9,6 +9,11 @@
 #include "Card.h"
 #include "Health.h"
 #include "Event.h"
+#include "Reticle.h"
+#include "ViewObject.h"
+
+// Defaults
+const int MANA_DEFAULT = 4;
 
 class Player : public df::Object {
 private:
@@ -18,6 +23,8 @@ private:
 	std::vector<Card*> discard;
 
 	Health health;
+	Reticle reticle;
+	df::ViewObject mana;
 
 public:
 	Player();
@@ -25,11 +32,20 @@ public:
 	// Add cards to permanent deck
 	void addCard(Card* new_card);
 
+	// display Card at (x,y)
+	void displayCard(Card* card, int x, int y);
+
 	// Draw card from deck into hand
 	Card* drawCard();
 
-	// Play Card, put it in the discard pile
-	void playCard();
+	// Draw card from deck into hand
+	bool canDraw();
+
+	// Draw upto 5 card from deck into hand
+	void draw5Cards();
+
+	// Move played card to the discard pile
+	void discardCard(Card* card);
 
 	// Shuffle cards
 	std::vector<Card*> shuffle(std::vector<Card*> cards);
@@ -41,8 +57,7 @@ public:
 	std::vector<Card*> getDeck();
 	std::vector<Card*> getHand();
 	std::vector<Card*> getDiscard();
-
-
-
+	df::ViewObject* getMana();
+	df::ViewObject* getHealth();
 };
 #endif

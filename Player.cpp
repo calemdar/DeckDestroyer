@@ -1,27 +1,73 @@
 #include <algorithm>  // for shuffle
 #include "Player.h"
 #include "Card.h"
+#include "CardAttack.h"
+#include "CardDefend.h"
 #include "Location.h"
 #include "LogManager.h"
+#include "Windows.h"
+#include <Clock.h>
+#include "Vector.h"
+#include "Reticle.h"
+#include <WorldManager.h>
 
 
-Player::Player(){
+Player::Player() {
+
+	setSprite("player");
+	setType("Player");
+	setPosition(df::Vector(30, 20));
+
+	reticle = Reticle();
+	health.setViewString("Player Health");
+	health.setType("Player Health");
+	health.setLocation(df::TOP_LEFT);
+
+	mana.setViewString("Mana");
+	mana.setValue(MANA_DEFAULT);
+	mana.setLocation(df::TOP_CENTER); \
+	mana.setColor(df::CYAN);
+
 	// Basic card
 	permanent_deck.clear();
 	deck.clear();
 	hand.clear();
 	discard.clear();
 
-	for (int i = 0; i < 10; i++) {
-		Card* attack = new Card("Strike", 2, "Attack", "Does 5 damage");
-		attack->setSprite("strike");
-		
-
+	// Add cards to player
+	
+	for (int i = 0; i < 5; i++) {
+		//CardAttack* attack = new CardAttack();
 		// Populate deck by default
-		addCard(attack);
+		//addCard(attack);
+
+		CardDefend* def = new CardDefend();
+		// Populate deck by default
+		addCard(def);
+		CardAttack* attack1 = new CardAttack(5);
+		CardAttack* attack2 = new CardAttack(10);
+		CardAttack* attack3 = new CardAttack(20);
+
+		attack1->setSprite("card");
+		attack2->setSprite("card-smash");
+		attack1->setSprite("card-charge");
+
+		addCard(attack1);
+		addCard(attack2);
+		addCard(attack3);
 	}
 	
 	
+	CardDefend* def1 = new CardDefend(); 
+	CardDefend* def2 = new CardDefend();
+
+	addCard(def1);
+	addCard(def2);
+
+	df::Clock mytimer = df::Clock();
+	mytimer.delta();
+
+	draw5Cards();
 }
 
 // Getters
@@ -37,17 +83,44 @@ std::vector<Card*> Player::getHand() {
 std::vector<Card*> Player::getDiscard() {
 	return discard;
 }
+df::ViewObject* Player::getHealth() {
+	return &health;
+}
+df::ViewObject* Player::getMana() {
+	return &mana;
+}
 
 // Add cards to permanent deck
 void Player::addCard(Card* new_card) {
+	int x = 20;
+	int y = 45;
+	int i = deck.size();
+	new_card->setCardPosition(x+i, y-i-2);
+	new_card->setVisible(true);
+	new_card->setClickable(false);
+
 	permanent_deck.push_back(new_card);
 	deck.push_back(new_card);
+}
+void Player::displayCard(Card* card, int x, int y) {
+
+	card->setPosition(df::Vector(x, y));
+	card->setClickable(true);
 }
 
 // Draw card from deck into hand
 Card* Player::drawCard() {
 	// Get last element 
-	Card* drawn = deck.at(deck.size() - 1);
+	Card* drawn = deck[(deck.size() - 1)];
+	int x = 50;
+	int y = 45;
+
+	int i = hand.size();
+
+	displayCard(drawn, x + 25 * i, y);
+
+	//drawn->doPathFollowing();
+
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
 
 	// add to hand
@@ -58,17 +131,62 @@ Card* Player::drawCard() {
 	return drawn;
 }
 
-// Play Card, put it in the discard pile
-void Player::playCard() {
+void Player::draw5Cards()
+{
+	LM.writeLog("DRAW 5 CARDS!!!");
+	// delete displayed cards
+	for (int i = 0; i < hand.size(); i++) {
+		Card* card = hand[i];
+		if (card->getPlayed()) {
+			LM.writeLog("CARD %d WAS PLAYED!!!",i);
+			for (int j = i + 1;j < hand.size();j++) {
+				hand[j - 1] = hand[j];
+			}
+			hand.pop_back();
+			i--;
+		}
+		else {
+			LM.writeLog("Card not played, will be moved");
+		}
+	}
+
+	LM.writeLog("DRAW not played %d CARDS!!!",int(hand.size()));
+
+	// redraw not played cards
+	for (int i = 0; i < hand.size(); i++) {
+		int x = 50;
+		int y = 45;
+
+		int ii = i;
+		displayCard(hand[i], x + 25 * ii, y);
+	}
+
+	// draw new cards up to 5
+	while (canDraw() && hand.size() < 5) {
+		drawCard();
+	}
+}
+
+bool Player::canDraw() {
+	return (deck.size() > 0);
+}
+
+// Move played card to the discard pile
+void Player::discardCard(Card* card) {
 	// Get last element 
-	Card* drawn = deck.at(deck.size() - 1);
-	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
+	LM.writeLog("Discard card with name %s", card->getName().c_str());
 
-	// add to hand
-	hand.push_back(drawn);
+	// add to discard pile
+	int x = 50;
+	int y = 45;
 
-	// remove from deck
-	deck.pop_back();
+	card->setCardPosition(0, 0);
+	card->setVisible(false);
+
+	Card* newcard = new Card();
+	discard.push_back(newcard);
+	displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
+	newcard->setClickable(false);
 }
 
 // Shuffle cards
@@ -81,5 +199,4 @@ std::vector<Card*> Player::shuffle(std::vector<Card*> cards) {
 int Player::eventHandler(const df::Event* p_e) {
 	return 0;
 }
-
 

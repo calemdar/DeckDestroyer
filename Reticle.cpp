@@ -4,6 +4,7 @@
 #include "WorldManager.h"
 #include "Card.h"
 #include "LogManager.h"
+#include "Turn.h"
 
 // Game includes.
 #include "Reticle.h"
@@ -33,6 +34,7 @@ int Reticle::eventHandler(const df::Event* p_e) {
 			df::Vector mouse_pos = p_mouse_event->getMousePosition();
 			const df::ObjectList obj_under_pointer = WM.objectsAtPosition(mouse_pos);
 			LM.writeLog("Mouse clicked");
+
 			if (!obj_under_pointer.isEmpty()) {
 				// Found an object
 				df::ObjectListIterator li = df::ObjectListIterator(&obj_under_pointer);
@@ -47,6 +49,11 @@ int Reticle::eventHandler(const df::Event* p_e) {
 						clicked_card->play();
 						break;
 					}
+					if (li.currentObject()->getType() == "Turn") {
+						Turn* turn_button = dynamic_cast <Turn*> (li.currentObject());
+						turn_button->endTurn();
+						LM.writeLog("end Turn!");
+					}
 					li.next();
 				}
 			}
@@ -57,7 +64,6 @@ int Reticle::eventHandler(const df::Event* p_e) {
 			setPosition(p_mouse_event->getMousePosition());
 			return 1;
 		}
-		
 	}
 
 	// If get here, have ignored this event.

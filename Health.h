@@ -5,9 +5,9 @@
 #include "ViewObject.h"
 
 // Global Defaults
-#define STARTING_HEALTH 100
-#define HEALTH_STRING "Health"
-
+const std::string HEALTH_STRING = "Health";
+const int STARTING_HEALTH = 100;
+const int ENEMY_HEALTH = 5;
 
 class Health : public df::ViewObject {
 
