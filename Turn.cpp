@@ -18,8 +18,8 @@ Turn::Turn() {
 
 // ends turn, changes turn pointer
 void Turn::endTurn() {
-	Enemy* enemy = dynamic_cast <Enemy*> (findMe("enemy"));
-	Player* player = dynamic_cast <Player*> (findMe("player"));
+	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
+	Player* player = dynamic_cast <Player*> (findMe("Player"));
 
 
 	if (turn == TurnPointer::PLAYER) {

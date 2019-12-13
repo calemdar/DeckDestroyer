@@ -39,9 +39,10 @@ void CardSpell::play() {
 
 	// Play spell
 
-	Player* player = dynamic_cast <Player*> (findMe("player"));
+	Player* player = dynamic_cast <Player*> (findMe("Player"));
 	if (getText() == "Draw one card") {
-		if(player->canDraw())player->drawCard();
+		if(player->canDraw())
+			player->drawCard();
 	}
 
 	player->discardCard(this);

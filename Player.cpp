@@ -57,6 +57,7 @@ Player::Player() {
 
 		addCard(attack1);
 		addCard(attack2);
+		addCard(spell);
 		addCard(attack3);
 	}
 	
@@ -199,7 +200,7 @@ void Player::draw5Cards()
 }
 
 bool Player::canDraw() {
-	return (deck.size() > 0);
+	return (int(deck.size()) > 0);
 }
 
 // Move played card to the discard pile
