@@ -21,7 +21,6 @@ slowdown 10
        .'             `.   
     _,'                 `,_
 end
-
 </BODY>
 <FOOTER>
 version 1

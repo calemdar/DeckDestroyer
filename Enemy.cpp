@@ -88,13 +88,11 @@ void Enemy::changeEnemy() {
 
 int Enemy::eventHandler(const df::Event* p_e) {
 
-	LM.writeLog("Enemy got event to handle");
 	if (p_e->getType() == df::OUT_EVENT) {
 		changeEnemy();
 		return 0;
 	}
 	else if (p_e->getType() == df::STEP_EVENT) {
-		LM.writeLog("Enemy Health is: %d", enemy_health.getValue());
 		if (enemy_health.getValue() < 1) {
 			die();
 			LM.writeLog("die() is called for enemy");

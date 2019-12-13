@@ -20,6 +20,7 @@ private:
 	Location location;
 	bool clickable;
 	bool played = false;
+	std::string cardType;
 
 public:
 	Card();
@@ -35,6 +36,7 @@ public:
 	void setLocation(Location new_location);
 	void setClickable(bool new_clickable);
 	void setPlayed(bool new_played);
+	void setCardType(std::string new_type);
 
 	// Getters
 	std::string getName() const;
@@ -44,6 +46,7 @@ public:
 	Location getLocation() const;
 	bool getClickable() const;
 	bool getPlayed() const;
+	std::string getCardType() const;
 	
 	virtual void play();
 };

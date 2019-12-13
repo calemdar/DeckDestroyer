@@ -8,17 +8,21 @@
 
 CardAttack::CardAttack() {
 	damage = 1;
+	setType("Card");
+	setCardType("Attack");
 }
 CardAttack::CardAttack(int new_damage) {
 	damage = new_damage;
-	setType("Attack");
+	setType("Card");
+	setCardType("Attack");
 	setText("Does %d damage.");
 }
 
 // Setters
 void CardAttack::setDamage(int new_damage) {
 	damage = new_damage;
-	setType("Attack");
+	setType("Card");
+	setCardType("Attack");
 	setText("Does %d damage.");
 }
 

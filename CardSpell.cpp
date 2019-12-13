@@ -1,16 +1,21 @@
 #include "CardSpell.h"
 #include "Card.h"
 #include "Location.h"
+#include "utility.h"
+#include "Player.h"
+#include "LogManager.h"
 
 CardSpell::CardSpell() {
 	spell_description = "Draw one card";
-	setType("Spell");
-	setText("Draw one Card");
+	setType("Card");
+	setCardType("Spell");
+	setText("Draw one card");
 }
 CardSpell::CardSpell(std::string new_spell) {
 	spell_description = "Draw one card";
-	setType("Spell");
-	setText("Draw one Card");
+	setType("Card");
+	setCardType("Spell");
+	setText("Draw one card");
 }
 
 // Setters
@@ -23,7 +28,22 @@ std::string CardSpell::getSpell() const {
 	return spell_description;
 }
 
-// Play Defend card
+// Play spell
 void CardSpell::play() {
+	LM.writeLog("Play Card Spell");
+	if (getClickable() == false)
+		return;
+	setPlayed(true);
+
+	LM.writeLog("Play Card Spell2");
+
 	// Play spell
+
+	Player* player = dynamic_cast <Player*> (findMe("player"));
+	if (getText() == "Draw one card") {
+		if(player->canDraw())player->drawCard();
+	}
+
+	player->discardCard(this);
+	return;
 }

@@ -66,6 +66,11 @@ void Card::setPlayed(bool new_played)
 	played = new_played;
 }
 
+void Card::setCardType(std::string new_type)
+{
+	cardType = new_type;
+}
+
 // Getters
 std::string Card::getName() const {
 	return name;
@@ -91,6 +96,11 @@ bool Card::getClickable() const
 bool Card::getPlayed() const
 {
 	return played;
+}
+
+std::string Card::getCardType() const
+{
+	return cardType;
 }
 
 void Card::play() {

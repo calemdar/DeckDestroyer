@@ -1,0 +1,40 @@
+<HEADER>
+frames 2
+width 22
+height 13
+color cyan
+slowdown 5
+</HEADER>
+<BODY>
+______________________
+|                    |
+|                    |
+|     Draw Card      |
+|                    |
+|                    |
+|                    |
+|____________________|
+|                    |
+|     Draw Card      |
+|                    |
+|      ________      |
+|_____|  DRAW  |_____|
+end
+______________________
+|                    |
+|                    |
+|     Draw Card      |
+|                    |
+|                    |
+|                    |
+|____________________|
+|                    |
+|     Draw Card      |
+|                    |
+|      ________      |
+|_____|  DRAW  |_____|
+end
+</BODY>
+<FOOTER>
+version 1
+</FOOTER>

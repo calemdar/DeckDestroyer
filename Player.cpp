@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "CardAttack.h"
+#include "CardSpell.h"
 #include "Location.h"
 #include "LogManager.h"
 #include "Windows.h"
@@ -27,9 +28,16 @@ Player::Player() {
 	discard.clear();
 
 	for (int i = 0; i < 10; i++) {
-		CardAttack* attack = new CardAttack();
+		Card* card;
+		
+		if(i%2)
+			card = new CardAttack();
+		else {
+			card = new CardSpell();
+			card->setSprite("cardDraw");
+		}
 		// Populate deck by default
-		addCard(attack);
+		addCard(card);
 	}
 
 	df::Clock mytimer = df::Clock();
@@ -66,30 +74,53 @@ void Player::addCard(Card* new_card) {
 }
 void Player::displayCard(Card* card, int x, int y) {
 
-	card->setPosition(df::Vector(x, y));
+	card->setCardPosition(x, y);
 	card->setClickable(true);
 }
 
 // Draw card from deck into hand
 Card* Player::drawCard() {
+
 	// Get last element 
 	Card* drawn = deck[(deck.size() - 1)];
+
+	// remove from deck
+	deck.pop_back();
+
 	int x = 50;
 	int y = 45;
 
 	int i = hand.size();
+	bool flag = false;
 
-	displayCard(drawn, x + 25 * i, y);
 
-	//drawn->doPathFollowing();
+	for (int i = 0;i < hand.size();i++) {
+		LM.writeLog("Hand card %d %d",i, int(hand[i]->getPlayed()));
+	}
+
+	for (int i = 0;i < hand.size();i++) {
+		if (hand[i]->getPlayed()==true) {
+			hand[i] = drawn;
+			displayCard(drawn, x + 25 * i, y);
+			flag = true;
+			break;
+		}
+	}
+	if (flag == false) {
+		displayCard(drawn, x + 25 * i, y);
+
+		// add to hand
+		hand.push_back(drawn);
+	}
+
+
+	for (int i = 0;i < hand.size();i++) {
+		LM.writeLog("NEW Hand card %d %d", i, int(hand[i]->getPlayed()));
+	}
 
 	LM.writeLog("Drew card with name %s", drawn->getName().c_str());
 
-	// add to hand
-	hand.push_back(drawn);
 
-	// remove from deck
-	deck.pop_back();
 	return drawn;
 }
 
@@ -100,12 +131,17 @@ void Player::draw5Cards()
 	for (int i = 0; i < hand.size(); i++) {
 		Card* card = hand[i];
 		if (card->getPlayed()) {
-			LM.writeLog("CARD %d WAS PLAYED!!!",i);
-			for (int j = i + 1;j < hand.size();j++) {
-				hand[j - 1] = hand[j];
+			if (deck.size() > 0) {
+				drawCard();
 			}
-			hand.pop_back();
-			i--;
+			else{
+				LM.writeLog("CARD %d WAS PLAYED!!!", i);
+				for (int j = i + 1;j < hand.size();j++) {
+					hand[j - 1] = hand[j];
+				}
+				hand.pop_back();
+				i--;
+			}
 		}
 		else {
 			LM.writeLog("Card not played, will be moved");
@@ -142,10 +178,29 @@ void Player::discardCard(Card* card) {
 	int x = 50;
 	int y = 45;
 
-	card->setCardPosition(0, 0);
+	card->setCardPosition(1, 1);
 	card->setVisible(false);
+	
+	LM.writeLog("ABABA %s", card->getCardType().c_str());
 
-	Card* newcard = new Card();
+	Card* newcard;
+	if (card->getCardType() == "Attack") {
+		LM.writeLog("ABABA Card is |%s|", card->getCardType().c_str());
+		newcard = new  CardAttack();
+	}else
+	if (card->getCardType() == "Spell") {
+
+		if (card->getText() == "Draw one card") {
+			LM.writeLog("ABABAB Card is |%s|", card->getText().c_str());
+			newcard = new  CardSpell("Draw Card");
+			newcard->setSprite("cardDraw");
+		}
+		else
+		if (card->getText() == "Heal") {
+			//newcard = new  CardSpell("Heal");
+		}
+	}
+
 	discard.push_back(newcard);
 	displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
 	newcard->setClickable(false);
