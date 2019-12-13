@@ -10,6 +10,7 @@
 #include <Clock.h>
 #include "Vector.h"
 #include "Reticle.h"
+#include "utility.h"
 #include <WorldManager.h>
 
 
@@ -47,24 +48,28 @@ Player::Player() {
 		addCard(def);
 		CardAttack* attack1 = new CardAttack(5);
 		CardAttack* attack2 = new CardAttack(10);
-		CardSpell* spell = new CardSpell();
+		CardSpell* spell = new CardSpell("Draw one card");
 		CardAttack* attack3 = new CardAttack(20);
+		CardSpell* heal = new CardSpell("Heal");
 
 		attack1->setSprite("card");
 		attack2->setSprite("card-smash");
 		spell->setSprite("cardDraw");
 		attack3->setSprite("card-charge");
+		heal->setSprite("cardHeal");
 		
 		attack1->setCost(1);
 		attack2->setCost(2);
 		attack3->setCost(4);
 
 		spell->setCost(1);
-
+		heal->setCost(2);
+		
 		addCard(attack1);
 		addCard(attack2);
 		addCard(spell);
 		addCard(attack3);
+		addCard(heal);
 	}
 	
 	
@@ -216,8 +221,12 @@ void Player::discardCard(Card* card) {
 	if (card->getCardType() == "Spell") {
 
 		if (card->getText() == "Draw one card") {
-			newcard = new  CardSpell("Draw Card");
+			newcard = new  CardSpell("Draw one card");
 			newcard->setSprite("cardDraw");
+		}else
+		if (card->getText() == "Heal") {
+			newcard = new  CardSpell("Heal");
+			newcard->setSprite("cardHeal");
 		}
 	}else
 	if (card->getText() == "Blocks %d health.") {
@@ -228,6 +237,12 @@ void Player::discardCard(Card* card) {
 	discard.push_back(newcard);
 	displayCard(newcard, x + 25 * 5 + discard.size(), y - discard.size() - 2);
 	newcard->setClickable(false);
+}
+
+void Player::heal(){
+	df::ViewObject* player_health = dynamic_cast <df::ViewObject*> (findMe("Player Health"));
+	int tmp_health = player_health->getValue();
+	player_health->setValue(tmp_health + 5);
 }
 
 // Shuffle cards

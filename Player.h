@@ -47,6 +47,9 @@ public:
 	// Move played card to the discard pile
 	void discardCard(Card* card);
 
+	// heal the player
+	void heal();
+
 	// Shuffle cards
 	std::vector<Card*> shuffle(std::vector<Card*> cards);
 
