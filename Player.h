@@ -10,6 +10,10 @@
 #include "Health.h"
 #include "Event.h"
 #include "Reticle.h"
+#include "ViewObject.h"
+
+// Defaults
+const int MANA_DEFAULT = 4;
 
 class Player : public df::Object {
 private:
@@ -20,6 +24,7 @@ private:
 
 	Health health;
 	Reticle reticle;
+	df::ViewObject mana;
 
 public:
 	Player();
@@ -52,5 +57,7 @@ public:
 	std::vector<Card*> getDeck();
 	std::vector<Card*> getHand();
 	std::vector<Card*> getDiscard();
+	df::ViewObject* getMana();
+	df::ViewObject* getHealth();
 };
 #endif

@@ -10,6 +10,10 @@
 #include "Event.h"
 #include "WorldManager.h"
 #include "LogManager.h"
+#include "ViewObject.h"
+
+// Enemy base damage
+const int BASE_DAMAGE = 10;
 
 class Enemy : public df::Object {
 private:
@@ -22,9 +26,9 @@ public:
 
 	// Does damage to the player
 	int doDamage();
-
+	void setDamage(int new_damage);
 	// Getters
-	Health getHealth() const;
+	Health* getHealth();
 	int getDamage() const;
 	// Called when enemy health reaches 0
 	void die();

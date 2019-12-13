@@ -1,0 +1,40 @@
+<HEADER>
+frames 2
+width 22
+height 13
+color red
+slowdown 5
+</HEADER>
+<BODY>
+______________________
+| ___                |
+|/   \               |
+|| 4 |   Charge      |
+|\___/               |
+|                    |
+|                    |
+|____________________|
+|                    |
+|   Does 20 damage   |
+|                    |
+|      ________      |
+|_____| ATTACK |_____|
+end
+______________________
+| ___                |
+|\   /               |
+|| 4 |   Charge      |
+|/___\               |
+|                    |
+|                    |
+|____________________|
+|                    |
+|   Does 20 damage   |
+|                    |
+|      ________      |
+|_____| ATTACK |_____|
+end
+</BODY>
+<FOOTER>
+version 1
+</FOOTER>

@@ -21,7 +21,7 @@ int Health::eventHandler(const df::Event* p_e) {
 	// Call parent handler.
 	if (df::ViewObject::eventHandler(p_e)) {
 		if (getViewString() == "Player Health" && getValue() < 1)
-			df::GameManager::getInstance().setGameOver();
+			GM.setGameOver();
 
 		if (getViewString() == "Enemy Health" && getValue() < 1) {
 			//new GameWin();

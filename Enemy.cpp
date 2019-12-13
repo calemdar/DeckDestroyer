@@ -7,14 +7,16 @@
 #include "WorldManager.h"
 #include "LogManager.h"
 #include "GameWin.h"
+#include "utility.h"
+#include "ViewObject.h"
 
 Enemy::Enemy() {
 	enemy_health = Health();
 	enemy_health.setValue(ENEMY_HEALTH);
 	enemy_health.setLocation(df::TOP_RIGHT); 
 	enemy_health.setViewString("Enemy Health");
-
-	attack_damage = 10;
+	enemy_health.setType("Enemy Health");
+	attack_damage = BASE_DAMAGE;
 
 	sprite_iterator = 0;
 
@@ -27,25 +29,38 @@ Enemy::Enemy() {
 
 	setSprite(sprite_names[sprite_iterator]);
 	setPosition(df::Vector(150, 20));
-	setType("enemy");
+	setType("Enemy");
 
 	// Event Handling
 	registerInterest(df::STEP_EVENT);
 	registerInterest(df::OUT_EVENT);
 }
 
+// Set damage 
+void Enemy::setDamage(int new_damage) {
+	attack_damage = new_damage;
+}
 // Do damage
 int Enemy::doDamage() {
 	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Player Health", -getDamage(), true);
-	WM.onEvent(&ev);
-	LM.writeLog("Event sent -%d Damage", getDamage());
+	if (attack_damage > 0) {
+		df::ViewObject* player_health = dynamic_cast <df::ViewObject*> (findMe("Player Health"));
+		int tmp_health = player_health->getValue();
+		player_health->setValue(tmp_health - attack_damage);
+	}
+	else {
+		setDamage(BASE_DAMAGE);
+	}
+
+	//df::EventView ev("Player Health", -getDamage(), true);
+	//WM.onEvent(&ev);
+	//LM.writeLog("Event sent -%d Damage", getDamage());
 	return attack_damage;
 }
 
 // Getters
-Health Enemy::getHealth() const {
-	return enemy_health;
+Health* Enemy::getHealth() {
+	return &enemy_health;
 }
 int Enemy::getDamage() const {
 	return attack_damage;
@@ -58,7 +73,6 @@ void Enemy::die() {
 	sprite_iterator++;
 
 	if (sprite_names.size() > sprite_iterator) {
-		enemy_health.setValue(ENEMY_HEALTH);
 		enemy_health.setColor(df::RED);
 		setSprite(sprite_names[sprite_iterator]);
 		setVelocity(df::Vector(0, 2));
@@ -73,6 +87,7 @@ void Enemy::changeEnemy() {
 	LM.writeLog("Sprite Iterator: %d", sprite_iterator);
 
 	if (sprite_names.size() > sprite_iterator) {
+		enemy_health.setValue(ENEMY_HEALTH);
 		enemy_health.setColor(df::YELLOW);
 		setPosition(df::Vector(150, 20));
 		setSprite(sprite_names[sprite_iterator]);
@@ -92,7 +107,10 @@ int Enemy::eventHandler(const df::Event* p_e) {
 		changeEnemy();
 		return 0;
 	}
-	else if (p_e->getType() == df::STEP_EVENT) {
+	/*
+	else if (p_e->getType() == df::VIEW_EVENT) {
+		
+>>>>>>> origin/cem
 		if (enemy_health.getValue() < 1) {
 			die();
 			LM.writeLog("die() is called for enemy");
@@ -100,7 +118,10 @@ int Enemy::eventHandler(const df::Event* p_e) {
 		}
 
 	}
+<<<<<<< HEAD
 		
+=======
+	*/
 	// error if it got here
 	return -1;
 }

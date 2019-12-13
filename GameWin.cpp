@@ -26,8 +26,8 @@ GameWin::GameWin() {
 		while (!li.isDone()) {
 			LM.writeLog("Object Found %s", li.currentObject()->getType().c_str());
 			if (li.currentObject()->getType() == "Card"
-				|| li.currentObject()->getType() == "player"
-				|| li.currentObject()->getType() == "enemy") {
+				|| li.currentObject()->getType() == "Player"
+				|| li.currentObject()->getType() == "Enemy") {
 				WM.markForDelete(li.currentObject());
 			}
 			li.next();

@@ -4,6 +4,8 @@
 #include "LogManager.h"
 #include "Player.h"
 #include "utility.h"
+#include "Enemy.h"
+#include "Health.h"
 
 
 CardAttack::CardAttack() {
@@ -36,15 +38,26 @@ void CardAttack::play() {
 	if (getClickable() == false)
 		return;
 	setPlayed(true);
-
+	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
+	
 	// Do damage
 	// Send "view" event to Heath HUD indicating damage.
-	df::EventView ev("Enemy Health", - getDamage(), true);
-	WM.onEvent(&ev);
-	LM.writeLog("Event sent -%d Damage", getDamage());
+	Health* enemy_health = enemy->getHealth();
+	df::EventView ev("Enemy Health", -getDamage(), true);
+	df::Event* e_ptr = dynamic_cast <df::Event*> (&ev);
+	enemy_health->eventHandler(e_ptr);
 
-	Player* player = dynamic_cast <Player*> (findMe("player"));
+	if (enemy_health->getValue() < 0) {
+		enemy->die();
+	}
+
+	//df::EventView ev("Enemy Health", - getDamage(), true);
+	//WM.onEvent(&ev);
+	//LM.writeLog("Event sent -%d Damage", getDamage());
+
+	Player* player = dynamic_cast <Player*> (findMe("Player"));
 
 	player->discardCard(this);
+	LM.writeLog("Attack Card played");
 	return;
 }

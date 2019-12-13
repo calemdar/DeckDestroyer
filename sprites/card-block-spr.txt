@@ -1,0 +1,40 @@
+<HEADER>
+frames 2
+width 22
+height 13
+color yellow
+slowdown 5
+</HEADER>
+<BODY>
+______________________
+| ___                |
+|/   \               |
+|| 2 |   Block       |
+|\___/               |
+|                    |
+|                    |
+|____________________|
+|                    |
+|   Prevents taking  |
+|  damage next turn  |
+|      ________      |
+|_____| DEFEND |_____|
+end
+______________________
+| ___                |
+|\   /               |
+|| 2 |   Block       |
+|/___\               |
+|                    |
+|                    |
+|____________________|
+|                    |
+|   Prevents taking  |
+|  damage next turn  |
+|      ________      |
+|_____| DEFEND |_____|
+end
+</BODY>
+<FOOTER>
+version 1
+</FOOTER>

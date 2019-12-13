@@ -3,6 +3,7 @@
 #include "Card.h"
 #include "CardAttack.h"
 #include "CardSpell.h"
+#include "CardDefend.h"
 #include "Location.h"
 #include "LogManager.h"
 #include "Windows.h"
@@ -15,11 +16,18 @@
 Player::Player() {
 
 	setSprite("player");
-	setType("player");
+	setType("Player");
 	setPosition(df::Vector(30, 20));
+
 	reticle = Reticle();
 	health.setViewString("Player Health");
+	health.setType("Player Health");
 	health.setLocation(df::TOP_LEFT);
+
+	mana.setViewString("Mana");
+	mana.setValue(MANA_DEFAULT);
+	mana.setLocation(df::TOP_CENTER); \
+	mana.setColor(df::CYAN);
 
 	// Basic card
 	permanent_deck.clear();
@@ -27,18 +35,37 @@ Player::Player() {
 	hand.clear();
 	discard.clear();
 
-	for (int i = 0; i < 10; i++) {
-		Card* card;
-		
-		if(i%2)
-			card = new CardAttack();
-		else {
-			card = new CardSpell();
-			card->setSprite("cardDraw");
-		}
+	// Add cards to player
+	
+	for (int i = 0; i < 5; i++) {
+		//CardAttack* attack = new CardAttack();
 		// Populate deck by default
-		addCard(card);
+		//addCard(attack);
+
+		CardDefend* def = new CardDefend();
+		// Populate deck by default
+		addCard(def);
+		CardAttack* attack1 = new CardAttack(5);
+		CardAttack* attack2 = new CardAttack(10);
+		CardSpell* spell = new CardSpell();
+		CardAttack* attack3 = new CardAttack(20);
+
+		attack1->setSprite("card");
+		attack2->setSprite("card-smash");
+		card->setSprite("cardDraw");
+		attack3->setSprite("card-charge");
+
+		addCard(attack1);
+		addCard(attack2);
+		addCard(attack3);
 	}
+	
+	
+	CardDefend* def1 = new CardDefend(); 
+	CardDefend* def2 = new CardDefend();
+
+	addCard(def1);
+	addCard(def2);
 
 	df::Clock mytimer = df::Clock();
 	mytimer.delta();
@@ -59,6 +86,12 @@ std::vector<Card*> Player::getHand() {
 std::vector<Card*> Player::getDiscard() {
 	return discard;
 }
+df::ViewObject* Player::getHealth() {
+	return &health;
+}
+df::ViewObject* Player::getMana() {
+	return &mana;
+}
 
 // Add cards to permanent deck
 void Player::addCard(Card* new_card) {
@@ -74,7 +107,7 @@ void Player::addCard(Card* new_card) {
 }
 void Player::displayCard(Card* card, int x, int y) {
 
-	card->setCardPosition(x, y);
+	card->setPosition(df::Vector(x, y));
 	card->setClickable(true);
 }
 

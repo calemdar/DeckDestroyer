@@ -18,7 +18,6 @@ Turn::Turn() {
 
 // ends turn, changes turn pointer
 void Turn::endTurn() {
-	LM.writeLog("end Turn!!!");
 	Enemy* enemy = dynamic_cast <Enemy*> (findMe("enemy"));
 	Player* player = dynamic_cast <Player*> (findMe("player"));
 
