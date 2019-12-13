@@ -2,7 +2,7 @@
 frames 1
 width 27
 height 14
-color blue
+color red
 slowdown 10
 </HEADER>
 <BODY>

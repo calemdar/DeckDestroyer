@@ -2,7 +2,7 @@
 frames 2
 width 27
 height 14
-color green
+color magenta
 slowdown 10
 </HEADER>
 <BODY>

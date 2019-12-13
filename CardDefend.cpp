@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "utility.h"
 #include "Player.h"
+#include "EventView.h"
 
 CardDefend::CardDefend() {
 	block = 1;
@@ -31,15 +32,23 @@ void CardDefend::play() {
 
 	if (getClickable() == false)
 		return;
-	setPlayed(true);
-
-	// Negate enemy damage
-	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
-	enemy->setDamage(0);
 
 	Player* player = dynamic_cast <Player*> (findMe("Player"));
+	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
 
-	player->discardCard(this);
-	LM.writeLog("Defend Card played");
+	if (getCost() <= player->getMana()->getValue()) {
+		setPlayed(true);
+
+		// Negate enemy damage
+		enemy->setDamage(0);
+
+		// use mana
+		df::EventView e_mana("Mana", -getCost(), true);
+		df::Event* e_mana_ptr = dynamic_cast <df::Event*> (&e_mana);
+		player->getMana()->eventHandler(e_mana_ptr);
+
+		player->discardCard(this);
+		LM.writeLog("Defend Card played");
+	}
 	return;
 }

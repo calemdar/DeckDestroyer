@@ -27,6 +27,9 @@ Enemy::Enemy() {
 	sprite_names.push_back("enemy1-dead");
 	sprite_names.push_back("enemy2");
 	sprite_names.push_back("enemy2-dead");
+	sprite_names.push_back("enemy3");
+	sprite_names.push_back("enemy3-dead");
+
 
 	setSprite(sprite_names[sprite_iterator]);
 	setPosition(df::Vector(150, 20));
@@ -87,7 +90,7 @@ void Enemy::changeEnemy() {
 	sprite_iterator++;
 
 	if (sprite_names.size() > sprite_iterator) {
-		enemy_health.setValue(ENEMY_HEALTH);
+		enemy_health.setValue(ENEMY_HEALTH + (10 * sprite_iterator));
 		enemy_health.setColor(df::YELLOW);
 		setPosition(df::Vector(150, 20));
 		setSprite(sprite_names[sprite_iterator]);

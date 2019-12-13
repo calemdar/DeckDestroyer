@@ -57,6 +57,8 @@ void loadResources(void) {
 	RM.loadSprite("sprites/enemy-dead-spr.txt", "enemy1-dead");
 	RM.loadSprite("sprites/enemy2-spr.txt", "enemy2");
 	RM.loadSprite("sprites/enemy2-dead-spr.txt", "enemy2-dead");
+	RM.loadSprite("sprites/enemy3-spr.txt", "enemy3");
+	RM.loadSprite("sprites/enemy3-dead-spr.txt", "enemy3-dead");
 
 	RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 	RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");

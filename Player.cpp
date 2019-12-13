@@ -37,7 +37,7 @@ Player::Player() {
 
 	// Add cards to player
 	
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 5; i++) {
 		//CardAttack* attack = new CardAttack();
 		// Populate deck by default
 		//addCard(attack);
@@ -54,6 +54,12 @@ Player::Player() {
 		attack2->setSprite("card-smash");
 		spell->setSprite("cardDraw");
 		attack3->setSprite("card-charge");
+		
+		attack1->setCost(1);
+		attack2->setCost(2);
+		attack3->setCost(4);
+
+		spell->setCost(1);
 
 		addCard(attack1);
 		addCard(attack2);
@@ -64,6 +70,9 @@ Player::Player() {
 	
 	CardDefend* def1 = new CardDefend(); 
 	CardDefend* def2 = new CardDefend();
+
+	def1->setCost(2);
+	def2->setCost(2);
 
 	addCard(def1);
 	addCard(def2);

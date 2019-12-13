@@ -37,36 +37,41 @@ int CardAttack::getDamage() const{
 void CardAttack::play() {
 	if (getClickable() == false)
 		return;
-	setPlayed(true);
-	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
 	
-	// Do damage
-	// Send "view" event to Heath HUD indicating damage.
-	Health* enemy_health = enemy->getHealth();
-	df::EventView ev("Enemy Health", -getDamage(), true);
-	df::Event* e_ptr = dynamic_cast <df::Event*> (&ev);
-	enemy_health->eventHandler(e_ptr);
-
-	if (enemy_health->getValue() < 0) {
-		enemy->die();
-		Player* player = dynamic_cast <Player*> (findMe("Player"));
-
-		int handSize = player->getHand().size();
-		for (int i = 0;i < handSize;i++) {
-			Card* c = player->getHand()[i];
-			if (c->getPlayed() == false) {
-				c->setClickable(false);
-			}
-		}
-	}
-
-	//df::EventView ev("Enemy Health", - getDamage(), true);
-	//WM.onEvent(&ev);
-	//LM.writeLog("Event sent -%d Damage", getDamage());
 
 	Player* player = dynamic_cast <Player*> (findMe("Player"));
+	Enemy* enemy = dynamic_cast <Enemy*> (findMe("Enemy"));
+	
+	if (getCost() <= player->getMana()->getValue()) {
+		setPlayed(true);
+		// Do damage
+		// Send "view" event to Heath HUD indicating damage.
+		Health* enemy_health = enemy->getHealth();
+		df::EventView ev("Enemy Health", -getDamage(), true);
+		df::EventView e_mana("Mana", -getCost(), true);
+		df::Event* e_ptr = dynamic_cast <df::Event*> (&ev);
+		df::Event* e_mana_ptr = dynamic_cast <df::Event*> (&e_mana);
+		enemy_health->eventHandler(e_ptr);
+		player->getMana()->eventHandler(e_mana_ptr);
 
-	player->discardCard(this);
-	LM.writeLog("Attack Card played");
+		if (enemy_health->getValue() <= 0) {
+			enemy->die();
+
+
+			int handSize = player->getHand().size();
+			for (int i = 0; i < handSize; i++) {
+				Card* c = player->getHand()[i];
+				if (c->getPlayed() == false) {
+					c->setClickable(false);
+				}
+			}
+		}
+
+		//df::EventView ev("Enemy Health", - getDamage(), true);
+		//WM.onEvent(&ev);
+		//LM.writeLog("Event sent -%d Damage", getDamage());
+		player->discardCard(this);
+		LM.writeLog("Attack Card played");
+	}
 	return;
 }

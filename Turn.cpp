@@ -29,6 +29,7 @@ void Turn::endTurn() {
 	}
 	else if (turn == TurnPointer::ENEMY) {
 		turn = TurnPointer::PLAYER;
+		player->getMana()->setValue(4);
 		player->draw5Cards();
 		setValue(1);
 	}
